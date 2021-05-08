@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct Diary: Decodable, Identifiable {
-    var id = UUID()
+struct Diary: Hashable, Equatable, Codable {
     let title: String
     let content: String
-    let tags: [Tag]
 }

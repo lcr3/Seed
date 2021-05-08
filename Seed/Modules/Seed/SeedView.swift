@@ -6,55 +6,41 @@
 //  
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct SeedView: View {
-    var article: [Diary] = []
-
+    let store: Store<SeedState, SeedAction>
     var body: some View {
-        NavigationView() {
-            VStack() {
-                List {
-                    Section(header: DialySectionHeader("Dialy", tapAction: {
-                        // send event
-                    })) {
-                        ForEach(article) { diary in
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(diary.title)
-                                    .bold()
-                                HStack {
-                                    // tagださいかも
-                                    ForEach(diary.tags) { tag in
-                                        Button(action: {
-                                            print("Button action")
-                                        }) {
-                                            HStack {
-                                                Text(tag.name)
-                                                    .font(.caption2)
-                                            }.padding(3)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 8.0)
-                                                    .stroke(lineWidth: 1.0)
-                                            )
-                                        }
-                                    }
+        WithViewStore(self.store) { viewStore in
+            NavigationView() {
+                VStack() {
+                    List {
+                        Section(header: DialySectionHeader("Dialy", tapAction: {
+                            ViewStore(store).send(.showNewDiary)
+                        })) {
+                            ForEach(viewStore.state.diaries, id: \.self) { diary in
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(diary.title)
+                                        .bold()
+                                    Text(diary.content)
+                                        .font(.caption)
+                                        .lineLimit(3)
+                                        .foregroundColor(.gray)
                                 }
-                                Text(diary.content)
-                                    .font(.caption)
-                                    .lineLimit(3)
-                                    .foregroundColor(.gray)
+                                .padding(.bottom, 8)
+                                .padding(.top, 8)
                             }
-                            .padding(.bottom, 8)
-                            .padding(.top, 8)
                         }
                     }
+                    .listStyle(InsetGroupedListStyle())
+                }.onAppear() {
+                    ViewStore(store).send(.fetchDiaries)
                 }
-                .listStyle(InsetGroupedListStyle())
-
-            }.navigationTitle("Seed")
+                .navigationTitle("Seed")
+            }
         }
     }
-
 }
 
 struct SeedView_Previews: PreviewProvider {
