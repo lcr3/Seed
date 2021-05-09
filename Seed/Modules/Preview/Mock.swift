@@ -22,6 +22,11 @@ extension SeedView {
     )
 }
 
+extension DialySectionHeader {
+    static var preview = Self("Dialy") {
+    }
+}
+
 extension CreateDiaryView {
     static var preview = CreateDiaryView(
         store: Store(
@@ -34,3 +39,4 @@ extension CreateDiaryView {
         )
     )
 }
+
