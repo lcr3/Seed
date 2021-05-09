@@ -13,6 +13,8 @@ import Foundation
 
 struct FirebaseApiClient {
     public var fetchDiaries: () -> Effect<[Diary], ApiFailure>
+    public var create: (Diary) -> Effect<Bool, ApiFailure>
+
     struct ApiFailure: Error, Equatable {
         let message: String
     }
@@ -21,8 +23,7 @@ struct FirebaseApiClient {
 extension FirebaseApiClient {
     public static let live = FirebaseApiClient {
         .future { callback in
-            let db = Firestore.firestore()
-            db.collection("diaries").getDocuments { snapshot, error in
+            Firestore.firestore().collection("diaries").getDocuments { snapshot, error in
                 if let error = error {
                     callback(.failure(ApiFailure(message: error.localizedDescription)))
                 }
@@ -39,6 +40,20 @@ extension FirebaseApiClient {
                     }
                 }
                 callback(.success(diaries))
+            }
+        }
+    } create: { diary in
+        .future { callback in
+            Firestore.firestore().collection("diaries").addDocument(data: [
+                "title": diary.title,
+                "content": diary.content,
+                "user_id": 1,
+                "created_at": Timestamp(date: Date())
+            ]) { error in
+                if let error = error {
+                    callback(.failure(ApiFailure.init(message: "create diary error")))
+                }
+                callback(.success(true))
             }
         }
     }
@@ -58,6 +73,10 @@ extension FirebaseApiClient {
                     )
                 ])
             )
+        }
+    } create: { diary in
+        .future { callback in
+            callback(.success(true))
         }
     }
 }

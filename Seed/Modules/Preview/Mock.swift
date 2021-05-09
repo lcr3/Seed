@@ -22,7 +22,15 @@ extension SeedView {
     )
 }
 
-extension DialySectionHeader {
-    static var preview = Self("Dialy") {
-    }
+extension CreateDiaryView {
+    static var preview = CreateDiaryView(
+        store: Store(
+            initialState: CreateDairyState(),
+            reducer: createDairyReducer,
+            environment: CreateDairyEnvironment(
+                client: FirebaseApiClient.mock,
+                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+            )
+        )
+    )
 }

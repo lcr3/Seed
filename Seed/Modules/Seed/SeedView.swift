@@ -16,9 +16,24 @@ struct SeedView: View {
             NavigationView() {
                 VStack() {
                     List {
-                        Section(header: DialySectionHeader("Dialy", tapAction: {
-                            ViewStore(store).send(.showNewDiary)
-                        })) {
+                        Section(
+                            header: HStack {
+                                Text("Diary")
+                                Spacer()
+                                NavigationLink(destination: CreateDiaryView(
+                                    store: Store(
+                                        initialState: CreateDairyState(),
+                                        reducer: createDairyReducer,
+                                        environment: CreateDairyEnvironment(
+                                            client: FirebaseApiClient.live,
+                                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                        )
+                                    )
+                                )) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.body)
+                                }
+                            }) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(diary.title)
@@ -31,6 +46,7 @@ struct SeedView: View {
                                 .padding(.bottom, 8)
                                 .padding(.top, 8)
                             }
+
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
