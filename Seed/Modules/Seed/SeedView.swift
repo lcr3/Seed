@@ -16,24 +16,9 @@ struct SeedView: View {
             NavigationView() {
                 VStack() {
                     List {
-                        Section(
-                            header: HStack {
-                                Text("Diary")
-                                Spacer()
-                                NavigationLink(destination: CreateDiaryView(
-                                    store: Store(
-                                        initialState: CreateDairyState(),
-                                        reducer: createDairyReducer,
-                                        environment: CreateDairyEnvironment(
-                                            client: FirebaseApiClient.live,
-                                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                                        )
-                                    )
-                                )) {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.body)
-                                }
-                            }) {
+                        Section(header: DialySectionHeader("Dialy", tapAction: {
+                            ViewStore(store).send(.showNewDiary)
+                        })) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(diary.title)
@@ -46,12 +31,22 @@ struct SeedView: View {
                                 .padding(.bottom, 8)
                                 .padding(.top, 8)
                             }
-
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
                 }.onAppear() {
                     ViewStore(store).send(.fetchDiaries)
+                }.sheet(isPresented: viewStore.binding(get: { $0.showCreateDiary } , send: SeedAction.showedNewDiary)) {
+                    CreateDiaryView(
+                        store: Store(
+                            initialState: CreateDairyState(),
+                            reducer: createDairyReducer,
+                            environment: CreateDairyEnvironment(
+                                client: FirebaseApiClient.live,
+                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                            )
+                        )
+                    )
                 }
                 .navigationTitle("Seed")
             }

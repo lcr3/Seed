@@ -11,10 +11,12 @@ import Foundation
 
 struct SeedState: Equatable {
     var diaries: [Diary] = []
+    var showCreateDiary = false
 }
 
 enum SeedAction: Equatable {
     case showNewDiary
+    case showedNewDiary
     case fetchDiaries
     case fetchResponse(Result<[Diary], FirebaseApiClient.ApiFailure>)
 }
@@ -27,6 +29,10 @@ struct SeedEnvironment {
 let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, action, environment in
     switch action {
     case .showNewDiary:
+        state.showCreateDiary = true
+        return .none
+    case .showedNewDiary:
+        state.showCreateDiary = false
         return .none
     case .fetchDiaries:
         return environment.client
