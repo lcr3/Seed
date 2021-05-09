@@ -17,7 +17,6 @@ enum SeedAction: Equatable {
     case showNewDiary
     case fetchDiaries
     case fetchResponse(Result<[Diary], FirebaseApiClient.ApiFailure>)
-
 }
 
 struct SeedEnvironment {
