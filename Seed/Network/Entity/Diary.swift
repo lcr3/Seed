@@ -6,9 +6,11 @@
 //  
 //
 
+import FirebaseFirestoreSwift
 import Foundation
 
 struct Diary: Hashable, Equatable, Codable {
+    @DocumentID var id: String?
     let title: String
     let content: String
 }
