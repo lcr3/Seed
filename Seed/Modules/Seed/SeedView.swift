@@ -17,7 +17,7 @@ struct SeedView: View {
                 VStack() {
                     List {
                         Section(header: DialySectionHeader("Dialy", tapAction: {
-                            ViewStore(store).send(.showNewDiary)
+                            ViewStore(store).send(.addButtonTapped)
                         })) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
                                 VStack(alignment: .leading, spacing: 8) {
@@ -30,6 +30,9 @@ struct SeedView: View {
                                 }
                                 .padding(.bottom, 8)
                                 .padding(.top, 8)
+                            }.onDelete { offsets in
+                                let index = offsets.first!
+                                ViewStore(store).send(.deleteButtonTapped(index))
                             }
                         }
                     }
@@ -48,6 +51,13 @@ struct SeedView: View {
                         )
                     )
                 }
+                alert(
+                    store.scope(
+                        state: { $0.deleteDiaryAlertState.alert },
+                        action: SeedAction.deleteAlert
+                    ),
+                    dismiss: DeleteDiaryAlertAction.dismissAlert
+                )
                 .navigationTitle("Seed")
             }
         }

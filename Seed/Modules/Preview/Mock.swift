@@ -12,7 +12,10 @@ import SwiftUI
 extension SeedView {
     static var preview = SeedView(
         store: Store(
-            initialState: SeedState(),
+            initialState: SeedState(
+                deleteDiaryAlertState: DeleteDiaryAlertState(
+                documentId: "")
+            ),
             reducer: seedReducer,
             environment: SeedEnvironment(
                 client: FirebaseApiClient.mock,

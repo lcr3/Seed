@@ -10,15 +10,25 @@ import ComposableArchitecture
 import Foundation
 
 struct SeedState: Equatable {
-    var diaries: [Diary] = []
-    var showCreateDiary = false
+    public var diaries: [Diary]
+    public var showCreateDiary: Bool
+    public var deleteDiaryAlertState: DeleteDiaryAlertState
+
+    public init(deleteDiaryAlertState: DeleteDiaryAlertState) {
+        diaries = []
+        showCreateDiary = false
+        self.deleteDiaryAlertState = deleteDiaryAlertState
+    }
 }
 
 enum SeedAction: Equatable {
-    case showNewDiary
+    case addButtonTapped
+    case deleteButtonTapped(Int)
     case showedNewDiary
     case fetchDiaries
     case fetchResponse(Result<[Diary], FirebaseApiClient.ApiFailure>)
+    case deleteResponse(Result<Bool, FirebaseApiClient.ApiFailure>)
+    case deleteAlert(DeleteDiaryAlertAction)
 }
 
 struct SeedEnvironment {
@@ -28,7 +38,7 @@ struct SeedEnvironment {
 
 let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, action, environment in
     switch action {
-    case .showNewDiary:
+    case .addButtonTapped:
         state.showCreateDiary = true
         return .none
     case .showedNewDiary:
@@ -45,6 +55,37 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
         return .none
     case let .fetchResponse(.failure(failure)):
         print("error")
+        return .none
+    case let .deleteButtonTapped(index):
+        let targetDiary = state.diaries[index]
+        guard let documentId = targetDiary.id else {
+            return .none
+        }
+        state.deleteDiaryAlertState.documentId = documentId
+        state.deleteDiaryAlertState.alert = .init(
+            title: TextState("⚠削除してもよろしいですか?"),
+            message: TextState(targetDiary.title),
+            primaryButton: .default(.init("OK"),
+                                    send: .okButtonTapped),
+            secondaryButton: .cancel()
+        )
+        return .none
+    case let .deleteResponse(.success(result)):
+        return .none
+    case let .deleteResponse(.failure(error)):
+        return .none
+    case .deleteAlert(.okButtonTapped):
+        state.deleteDiaryAlertState.alert = nil
+        return environment.client
+            .delete(state.deleteDiaryAlertState.documentId)
+            .receive(on: environment.mainQueue)
+            .catchToEffect()
+            .map(SeedAction.deleteResponse)
+    case .deleteAlert(.cancelButtonTapped):
+        state.deleteDiaryAlertState.alert = nil
+        return .none
+    case .deleteAlert(.dismissAlert):
+        state.deleteDiaryAlertState.alert = nil
         return .none
     }
 }

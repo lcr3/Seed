@@ -14,9 +14,10 @@ import Foundation
 struct FirebaseApiClient {
     public var fetchDiaries: () -> Effect<[Diary], ApiFailure>
     public var create: (Diary) -> Effect<Bool, ApiFailure>
+    public var delete: (String) -> Effect<Bool, ApiFailure>
 
     struct ApiFailure: Error, Equatable {
-        let message: String
+        public let message: String
     }
 }
 
@@ -32,6 +33,7 @@ extension FirebaseApiClient {
                 }
                 var diaries: [Diary] = []
                 documents.forEach { content in
+                    print(content.data())
                     do {
                         let diary = try Firestore.Decoder().decode(Diary.self, from: content.data())
                         diaries.append(diary)
@@ -56,6 +58,15 @@ extension FirebaseApiClient {
                 callback(.success(true))
             }
         }
+    } delete: { documentId in
+        .future { callback in
+            Firestore.firestore().collection("diaries").document(documentId).delete { error in
+                if let error = error {
+                    callback(.failure(ApiFailure.init(message: "delete diary error")))
+                }
+                callback(.success(true))
+            }
+        }
     }
 
     public static let mock = FirebaseApiClient {
@@ -75,6 +86,10 @@ extension FirebaseApiClient {
             )
         }
     } create: { diary in
+        .future { callback in
+            callback(.success(true))
+        }
+    } delete: { documentId in
         .future { callback in
             callback(.success(true))
         }
