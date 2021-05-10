@@ -24,7 +24,7 @@ struct FirebaseApiClient {
 extension FirebaseApiClient {
     public static let live = FirebaseApiClient {
         .future { callback in
-            Firestore.firestore().collection("diaries").getDocuments { snapshot, error in
+            Firestore.firestore().collection("diaries").order(by: "created_at").getDocuments { snapshot, error in
                 if let error = error {
                     callback(.failure(ApiFailure(message: error.localizedDescription)))
                 }
