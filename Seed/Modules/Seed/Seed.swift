@@ -27,7 +27,7 @@ enum SeedAction: Equatable {
     case showedNewDiary
     case fetchDiaries
     case fetchResponse(Result<[Diary], FirebaseApiClient.ApiFailure>)
-    case deleteResponse(Result<Bool, FirebaseApiClient.ApiFailure>)
+    case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
     case deleteAlert(DeleteDiaryAlertAction)
 }
 
@@ -59,7 +59,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
     case let .deleteButtonTapped(index):
         let targetDiary = state.diaries[index]
         guard let documentId = targetDiary.id else {
-            return .none
+            fatalError("DocumentId is nil")
         }
         state.deleteDiaryAlertState.documentId = documentId
         state.deleteDiaryAlertState.alert = .init(
@@ -70,9 +70,19 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
             secondaryButton: .cancel()
         )
         return .none
-    case let .deleteResponse(.success(result)):
+    case let .deleteResponse(.success(documentId)):
+        let deleteDiaryIndex = state.diaries.firstIndex {
+            $0.id == documentId
+        }
+        guard let wrapIndex = deleteDiaryIndex else {
+            fatalError("Not found delete diary index")
+        }
+        state.diaries.remove(at: wrapIndex)
+        state.deleteDiaryAlertState.documentId = ""
         return .none
     case let .deleteResponse(.failure(error)):
+        state.deleteDiaryAlertState.documentId = ""
+
         return .none
     case .deleteAlert(.okButtonTapped):
         state.deleteDiaryAlertState.alert = nil

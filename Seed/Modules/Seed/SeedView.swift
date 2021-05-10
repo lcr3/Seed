@@ -39,7 +39,10 @@ struct SeedView: View {
                     .listStyle(InsetGroupedListStyle())
                 }.onAppear() {
                     ViewStore(store).send(.fetchDiaries)
-                }.sheet(isPresented: viewStore.binding(get: { $0.showCreateDiary } , send: SeedAction.showedNewDiary)) {
+                }.sheet(isPresented: viewStore.binding(
+                            get: { $0.showCreateDiary } ,
+                            send: SeedAction.showedNewDiary)
+                ) {
                     CreateDiaryView(
                         store: Store(
                             initialState: CreateDairyState(),
@@ -51,7 +54,7 @@ struct SeedView: View {
                         )
                     )
                 }
-                alert(
+                .alert(
                     store.scope(
                         state: { $0.deleteDiaryAlertState.alert },
                         action: SeedAction.deleteAlert
