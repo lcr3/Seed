@@ -62,6 +62,12 @@ struct SeedView: View {
                     dismiss: DeleteDiaryAlertAction.dismissAlert
                 )
                 .navigationTitle("Seed")
+                // Debug
+                .navigationBarItems(trailing: Button(action: {
+                    ViewStore(store).send(.fetchDiaries)
+                }, label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                }))
             }
         }
     }
