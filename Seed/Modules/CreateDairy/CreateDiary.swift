@@ -7,14 +7,26 @@
 //
 
 import ComposableArchitecture
+import Firebase
 
 struct CreateDairyState: Equatable {
-    var isLoading = false
-    var creationCompleted = false
+    var title: String
+    var content: String
+    var isLoading: Bool
+    var createFinish: Bool
+
+    init() {
+        title = ""
+        content = ""
+        isLoading = false
+        createFinish = false
+    }
 }
 
 enum CreateDairyAction: Equatable {
-    case create(Diary)
+    case changeTitle(String)
+    case changeContent(String)
+    case create
     case createResponse(Result<Bool, FirebaseApiClient.ApiFailure>)
 }
 
@@ -25,16 +37,31 @@ struct CreateDairyEnvironment {
 
 let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, CreateDairyEnvironment> { state, action, environment in
     switch action {
-    case let .create(diary):
+    case let .changeTitle(title):
+        state.title = title
+        return .none
+    case let .changeContent(content):
+        state.content = content
+        return .none
+    case .create:
+        if state.title.isEmpty && state.content.isEmpty {
+            state.createFinish = true
+            return .none
+        }
         state.isLoading = true
+        let newDiary = Diary(
+            title: state.title,
+            content: state.content,
+            userId: 1,
+            createdAt: Timestamp())
         return environment.client
-            .create(diary)
+            .create(newDiary)
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(CreateDairyAction.createResponse)
     case let .createResponse(.success(result)):
         state.isLoading = false
-        state.creationCompleted = true
+        state.createFinish = true
         return .none
     case let .createResponse(.failure(failure)):
         state.isLoading = false

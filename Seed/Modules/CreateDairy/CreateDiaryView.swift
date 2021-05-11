@@ -10,8 +10,6 @@ import ComposableArchitecture
 import SwiftUI
 
 struct CreateDiaryView: View {
-    @State private var titleText = ""
-    @State private var contentText = ""
     @Environment(\.presentationMode) @Binding var presentationMode
     let store: Store<CreateDairyState, CreateDairyAction>
 
@@ -21,21 +19,32 @@ struct CreateDiaryView: View {
                 List {
                     HStack() {
                         Text("Title")
-                        TextField("What happened today...", text: $titleText)
-                            .multilineTextAlignment(.trailing)
+                        TextField(
+                            "What happened today...",
+                            text: viewStore.binding(
+                                get: \.title,
+                                send: CreateDairyAction.changeTitle
+                            )
+                        )
+                        .multilineTextAlignment(.trailing)
                     }
                     Section(header: Text("Contents")) {
-                        TextEditor(text: $contentText)
-                            .frame(height: 500)
+                        TextEditor(
+                            text: viewStore.binding(
+                                get: \.content,
+                                send: CreateDairyAction.changeContent
+                            )
+                        )
+                        .frame(height: 500)
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
                 .navigationTitle("Write diary")
                 .navigationBarItems(trailing: Button("保存", action: {
-                    ViewStore(store).send(.create(Diary(title: titleText, content: contentText)))
+                    ViewStore(store).send(.create)
                 }))
             }
-            .onChange(of: viewStore.creationCompleted) { completed in
+            .onChange(of: viewStore.createFinish) { completed in
                 if completed {
                     presentationMode.dismiss()
                 }
