@@ -35,7 +35,7 @@ struct SeedView: View {
                                 ViewStore(store).send(.deleteButtonTapped(index))
                             }
                         }
-                    }
+                    }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
                 }.onAppear() {
                     ViewStore(store).send(.fetchDiaries)
