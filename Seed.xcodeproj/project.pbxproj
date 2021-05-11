@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2905760B264A1EB80062C689 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905760A264A1EB80062C689 /* DiaryDetail.swift */; };
+		2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905760C264A4E9E0062C689 /* DiaryDetailView.swift */; };
 		29188BD0264540EF0024BC36 /* SeedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BCF264540EF0024BC36 /* SeedApp.swift */; };
 		29188BD4264540F20024BC36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29188BD3264540F20024BC36 /* Assets.xcassets */; };
 		29188BD7264540F20024BC36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29188BD6264540F20024BC36 /* Preview Assets.xcassets */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		2905760A264A1EB80062C689 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
+		2905760C264A4E9E0062C689 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		29188BCC264540EF0024BC36 /* Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29188BCF264540EF0024BC36 /* SeedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedApp.swift; sourceTree = "<group>"; };
 		29188BD3264540F20024BC36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				2905760A264A1EB80062C689 /* DiaryDetail.swift */,
+				2905760C264A4E9E0062C689 /* DiaryDetailView.swift */,
 			);
 			path = DiaryDetail;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */,
 				29188C1B264791910024BC36 /* CreateDiary.swift in Sources */,
 				29188C0026455BE80024BC36 /* SeedView.swift in Sources */,
+				2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */,
 				29188C11264627920024BC36 /* FirebaseApiClient.swift in Sources */,
 				2905760B264A1EB80062C689 /* DiaryDetail.swift in Sources */,
 				29188BD0264540EF0024BC36 /* SeedApp.swift in Sources */,

@@ -20,16 +20,30 @@ struct SeedView: View {
                             ViewStore(store).send(.addButtonTapped)
                         })) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(diary.title)
-                                        .bold()
-                                    Text(diary.content)
-                                        .font(.caption)
-                                        .lineLimit(3)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(.bottom, 8)
-                                .padding(.top, 8)
+                                NavigationLink(
+                                    destination: DiaryDetailView(
+                                        store: Store(
+                                            initialState: DiaryDetailState(diary: diary),
+                                            reducer: diaryDetailReducer,
+                                            environment: DiaryDetailEnvironment(
+                                                client: FirebaseApiClient.live,
+                                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                            )
+                                        )
+                                    ),
+                                    label: {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            Text(diary.title)
+                                                .bold()
+                                            Text(diary.content)
+                                                .font(.caption)
+                                                .lineLimit(1)
+                                                .foregroundColor(.gray)
+                                        }
+                                        .padding(.bottom, 8)
+                                        .padding(.top, 8)
+                                    }
+                                )
                             }.onDelete { offsets in
                                 let index = offsets.first!
                                 ViewStore(store).send(.deleteButtonTapped(index))

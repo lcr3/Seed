@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct Diary: Hashable, Equatable, Codable {
-    var id: String
+    @DocumentID var id: String?
     let title: String
     let content: String
     let userId: Int
@@ -25,7 +25,7 @@ struct Diary: Hashable, Equatable, Codable {
         case createdAt = "created_at"
     }
 
-    init(id: String = "", title: String = "", content: String = "", userId: Int = 0, createdAt: Timestamp = Timestamp()) {
+    init(id: String? = nil, title: String = "", content: String = "", userId: Int = 0, createdAt: Timestamp = Timestamp()) {
         self.id = id
         self.title = title
         self.content = content

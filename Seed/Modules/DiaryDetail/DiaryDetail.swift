@@ -21,7 +21,10 @@ struct DiaryDetailState: Equatable {
     }
 }
 
+
 enum DiaryDetailAction: Equatable {
+    case editTitle(String)
+    case editContent(String)
     case sheetButtonTapped
     case save
     case saveResponse(Result<String, FirebaseApiClient.ApiFailure>)
@@ -34,6 +37,12 @@ struct DiaryDetailEnvironment {
 
 let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, DiaryDetailEnvironment> { state, action, environment in
     switch action {
+    case let .editTitle(title):
+        state.editedTitle = title
+        return .none
+    case let .editContent(content):
+        state.editedContent = content
+        return .none
     case .sheetButtonTapped:
         // show action sheet
         return .none
