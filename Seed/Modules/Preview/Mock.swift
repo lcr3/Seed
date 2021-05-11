@@ -75,5 +75,9 @@ extension FirebaseApiClient {
         .future { callback in
             callback(.success(documentId))
         }
+    } update: { diary in
+        .future { callback in
+            callback(.success(diary.id))
+        }
     }
 }
