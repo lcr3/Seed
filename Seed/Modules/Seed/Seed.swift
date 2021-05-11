@@ -58,10 +58,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
         return .none
     case let .deleteButtonTapped(index):
         let targetDiary = state.diaries[index]
-        guard let documentId = targetDiary.id else {
-            fatalError("DocumentId is nil")
-        }
-        state.deleteDiaryAlertState.documentId = documentId
+        state.deleteDiaryAlertState.documentId = targetDiary.id
         state.deleteDiaryAlertState.alert = .init(
             title: TextState("⚠削除してもよろしいですか?"),
             message: TextState(targetDiary.title),
