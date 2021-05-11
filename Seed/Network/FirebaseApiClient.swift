@@ -74,7 +74,7 @@ extension FirebaseApiClient {
     }
     update: { diary in
         .future { callback in
-            Firestore.firestore().collection(Self.diaries).document(diary.id).updateData([
+            Firestore.firestore().collection(Self.diaries).document(diary.id!).updateData([
                 "title": diary.title,
                 "content": diary.content,
                 "user_id": diary.userId,
@@ -83,7 +83,7 @@ extension FirebaseApiClient {
                 if let error = error {
                     callback(.failure(.init(message: "Edit diary error")))
                 }
-                callback(.success(diary.id))
+                callback(.success(diary.id!))
             }
         }
     }

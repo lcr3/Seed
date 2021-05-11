@@ -44,6 +44,27 @@ extension CreateDiaryView {
     )
 }
 
+extension DiaryDetailView {
+    static var preview = DiaryDetailView(
+        store: Store(
+            initialState: DiaryDetailState(
+                diary: Diary(
+                    id: "documentId",
+                    title: "銃・病原菌・鉄",
+                    content: "アメリカ大陸の先住民はなぜ、旧大陸の住民に整復されたのか。なぜ、その逆は起こらなかったのか。現在の世界に広がる富とパワーの「地域格差」を生み出したものとは。1万3000年にわたる人類史のダイナミズムに隠された壮大な謎を、進化生物学、生物地理学、文化人類学、言語学など、広範な最新知見を縦横に駆使して解き明かす。ピュリッツァー賞、国際コスモス賞、朝日新聞「ゼロ年代の50冊」第1位を受賞した名著、待望の文庫化",
+                    userId: 1,
+                    createdAt: Timestamp()
+                )
+            ),
+            reducer: diaryDetailReducer,
+            environment: DiaryDetailEnvironment(
+                client: FirebaseApiClient.mock,
+                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+            )
+        )
+    )
+}
+
 extension FirebaseApiClient {
     public static let mock = FirebaseApiClient {
         .future { callback in
@@ -77,7 +98,7 @@ extension FirebaseApiClient {
         }
     } update: { diary in
         .future { callback in
-            callback(.success(diary.id))
+            callback(.success(diary.id!))
         }
     }
 }
