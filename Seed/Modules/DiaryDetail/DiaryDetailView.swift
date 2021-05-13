@@ -39,16 +39,9 @@ struct DiaryDetailView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Edit diary")
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                        presentationMode.dismiss()
-                                    }) {
-                                        HStack {
-                                            Image(systemName: "arrow.left")
-                                            Text("Back")
-                                        }
-                                    })
+            .onDisappear() {
+                viewStore.send(DiaryDetailAction.save)
+            }
         }
     }
 }

@@ -10,6 +10,10 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SeedView: View {
+    init(store: Store<SeedState, SeedAction>) {
+        self.store = store
+        ViewStore(store).send(.fetchDiaries)
+    }
     let store: Store<SeedState, SeedAction>
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -51,8 +55,6 @@ struct SeedView: View {
                         }
                     }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
-                }.onAppear() {
-                    ViewStore(store).send(.fetchDiaries)
                 }.sheet(isPresented: viewStore.binding(
                             get: { $0.showCreateDiary } ,
                             send: SeedAction.showedNewDiary)

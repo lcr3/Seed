@@ -60,8 +60,10 @@ let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, DiaryDetai
             .catchToEffect()
             .map(DiaryDetailAction.saveResponse)
     case let .saveResponse(.success(documentId)):
+        print("success saved")
         return .none
     case let .saveResponse(.failure(error)):
+        print("failure saved")
         return .none
     }
 }
