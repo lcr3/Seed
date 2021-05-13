@@ -26,7 +26,7 @@ enum SeedAction: Equatable {
     case deleteButtonTapped(Int)
     case showedNewDiary
     case fetchDiaries
-    case fetchResponse(Result<[Diary], FirebaseApiClient.ApiFailure>)
+    case updateDiaries(Result<[Diary], FirebaseApiClient.ApiFailure>)
     case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
     case deleteAlert(DeleteDiaryAlertAction)
 }
@@ -46,14 +46,14 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
         return .none
     case .fetchDiaries:
         return environment.client
-            .fetchDiaries()
+            .updateSnapshot()
             .receive(on: environment.mainQueue)
             .catchToEffect()
-            .map(SeedAction.fetchResponse)
-    case let .fetchResponse(.success(diaries)):
+            .map(SeedAction.updateDiaries)
+    case let .updateDiaries(.success(diaries)):
         state.diaries = diaries
         return .none
-    case let .fetchResponse(.failure(failure)):
+    case let .updateDiaries(.failure(failure)):
         print("error: \(failure)")
         return .none
     case let .deleteButtonTapped(index):
