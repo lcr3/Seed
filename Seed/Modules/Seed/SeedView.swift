@@ -12,7 +12,7 @@ import SwiftUI
 struct SeedView: View {
     init(store: Store<SeedState, SeedAction>) {
         self.store = store
-        ViewStore(store).send(.fetchDiaries)
+        ViewStore(store).send(.startObserve)
     }
     let store: Store<SeedState, SeedAction>
     var body: some View {
@@ -78,12 +78,6 @@ struct SeedView: View {
                     dismiss: DeleteDiaryAlertAction.dismissAlert
                 )
                 .navigationTitle("Seed")
-                // Debug
-                .navigationBarItems(trailing: Button(action: {
-                    ViewStore(store).send(.fetchDiaries)
-                }, label: {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                }))
             }
         }
     }

@@ -25,7 +25,7 @@ enum SeedAction: Equatable {
     case addButtonTapped
     case deleteButtonTapped(Int)
     case showedNewDiary
-    case fetchDiaries
+    case startObserve
     case updateDiaries(Result<[Diary], FirebaseApiClient.ApiFailure>)
     case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
     case deleteAlert(DeleteDiaryAlertAction)
@@ -44,7 +44,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
     case .showedNewDiary:
         state.showCreateDiary = false
         return .none
-    case .fetchDiaries:
+    case .startObserve:
         return environment.client
             .updateSnapshot()
             .receive(on: environment.mainQueue)
@@ -71,18 +71,10 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
         )
         return .none
     case let .deleteResponse(.success(documentId)):
-        let deleteDiaryIndex = state.diaries.firstIndex {
-            $0.id == documentId
-        }
-        guard let wrapIndex = deleteDiaryIndex else {
-            fatalError("Not found delete diary index")
-        }
-        state.diaries.remove(at: wrapIndex)
         state.deleteDiaryAlertState.documentId = ""
         return .none
     case let .deleteResponse(.failure(error)):
         state.deleteDiaryAlertState.documentId = ""
-
         return .none
     case .deleteAlert(.okButtonTapped):
         state.deleteDiaryAlertState.alert = nil
