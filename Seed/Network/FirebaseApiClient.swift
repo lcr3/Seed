@@ -6,6 +6,7 @@
 //  
 //
 
+import Combine
 import ComposableArchitecture
 import Firebase
 import FirebaseFirestoreSwift
@@ -13,7 +14,7 @@ import Foundation
 
 struct FirebaseApiClient {
     private static let diaries = "diaries"
-    public var fetchDiaries: () -> Effect<[Diary], ApiFailure>
+    public var updateSnapshot: () -> Effect<[Diary], ApiFailure>
     public var create: (_ diary: Diary) -> Effect<Bool, ApiFailure>
     public var delete: (_ documentId: String) -> Effect<String, ApiFailure>
     public var update: (_ diary: Diary) -> Effect<String, ApiFailure>
@@ -25,13 +26,22 @@ struct FirebaseApiClient {
 
 extension FirebaseApiClient {
     public static let live = FirebaseApiClient {
-        .future { callback in
-            Firestore.firestore().collection(Self.diaries).order(by: "created_at").getDocuments { snapshot, error in
+        .run { subscriber in
+            Firestore.firestore().collection(Self.diaries).order(by: "created_at").addSnapshotListener { snapshot, error in
                 if let error = error {
-                    callback(.failure(.init(message: error.localizedDescription)))
+                    subscriber.send(
+                        completion: .failure(
+                            .init(message: error.localizedDescription)
+                        )
+                    )
                 }
                 guard let documents = snapshot?.documents else {
-                    return callback(.failure(.init(message: "No documentation found.")))
+                    subscriber.send(
+                        completion: .failure(
+                            .init(message: "Snapshot is nil.")
+                        )
+                    )
+                    return
                 }
                 var diaries: [Diary] = []
                 documents.forEach { content in
@@ -42,10 +52,17 @@ extension FirebaseApiClient {
                         diary.id = content.documentID
                         diaries.append(diary)
                     } catch {
-                        callback(.failure(.init(message: error.localizedDescription)))
+                        subscriber.send(
+                            completion: .failure(
+                                .init(message: error.localizedDescription)
+                            )
+                        )
                     }
                 }
-                callback(.success(diaries))
+                subscriber.send(diaries)
+            }
+            return AnyCancellable {
+                print("cancel")
             }
         }
     } create: { diary in
