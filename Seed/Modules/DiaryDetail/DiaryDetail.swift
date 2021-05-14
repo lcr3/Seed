@@ -21,7 +21,6 @@ struct DiaryDetailState: Equatable {
     }
 }
 
-
 enum DiaryDetailAction: Equatable {
     case editTitle(String)
     case editContent(String)

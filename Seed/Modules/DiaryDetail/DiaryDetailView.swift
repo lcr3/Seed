@@ -16,7 +16,7 @@ struct DiaryDetailView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             List {
-                HStack() {
+                HStack {
                     Text("Title")
                     TextField(
                         "",
@@ -39,7 +39,7 @@ struct DiaryDetailView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Edit diary")
-            .onDisappear() {
+            .onDisappear {
                 viewStore.send(DiaryDetailAction.save)
             }
         }

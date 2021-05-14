@@ -27,10 +27,6 @@ extension SeedView {
     )
 }
 
-extension DialySectionHeader {
-    static var preview = Self("Diary")
-}
-
 extension CreateDiaryView {
     static var preview = CreateDiaryView(
         store: Store(
@@ -66,7 +62,7 @@ extension DiaryDetailView {
 }
 
 extension FirebaseApiClient {
-    public static let mock = FirebaseApiClient {
+    public static let mock = FirebaseApiClient() {
         .run { subscriber in
             subscriber.send([
                 Diary(title: "ガリア戦記",
@@ -98,6 +94,7 @@ extension FirebaseApiClient {
         }
     } update: { diary in
         .future { callback in
+            // swiftlint:disable force_unwrapping
             callback(.success(diary.id!))
         }
     }

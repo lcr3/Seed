@@ -25,7 +25,7 @@ struct FirebaseApiClient {
 }
 
 extension FirebaseApiClient {
-    public static let live = FirebaseApiClient {
+    public static let live = FirebaseApiClient() {
         .run { subscriber in
             Firestore.firestore().collection(Self.diaries).order(by: "created_at").addSnapshotListener { snapshot, error in
                 print("update snapshot")
@@ -91,7 +91,11 @@ extension FirebaseApiClient {
     }
     update: { diary in
         .future { callback in
-            Firestore.firestore().collection(Self.diaries).document(diary.id!).updateData([
+            guard let documentId = diary.id else {
+                callback(.failure(.init(message: "Document id is empty.")))
+                return
+            }
+            Firestore.firestore().collection(Self.diaries).document(documentId).updateData([
                 "title": diary.title,
                 "content": diary.content,
                 "user_id": diary.userId,
@@ -100,7 +104,7 @@ extension FirebaseApiClient {
                 if let error = error {
                     callback(.failure(.init(message: "Edit diary error")))
                 }
-                callback(.success(diary.id!))
+                callback(.success(documentId))
             }
         }
     }
