@@ -27,6 +27,7 @@ enum DiaryDetailAction: Equatable {
     case sheetButtonTapped
     case save
     case saveResponse(Result<String, FirebaseApiClient.ApiFailure>)
+    case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
 }
 
 struct DiaryDetailEnvironment {
@@ -46,6 +47,13 @@ let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, DiaryDetai
         // show action sheet
         return .none
     case .save:
+        if state.editedTitle.isEmpty && state.editedContent.isEmpty, let id = state.diary.id {
+            return environment.client
+                .delete(id)
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(DiaryDetailAction.deleteResponse)
+        }
         let updateDiary = Diary(
             id: state.diary.id,
             title: state.editedTitle,
@@ -63,6 +71,12 @@ let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, DiaryDetai
         return .none
     case let .saveResponse(.failure(error)):
         print("failure saved")
+        return .none
+    case let .deleteResponse(.success(documentId)):
+        print("success delete")
+        return .none
+    case let .deleteResponse(.failure(error)):
+        print("failure delete")
         return .none
     }
 }
