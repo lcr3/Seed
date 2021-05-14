@@ -28,6 +28,7 @@ extension FirebaseApiClient {
     public static let live = FirebaseApiClient {
         .run { subscriber in
             Firestore.firestore().collection(Self.diaries).order(by: "created_at").addSnapshotListener { snapshot, error in
+                print("update snapshot")
                 if let error = error {
                     subscriber.send(
                         completion: .failure(
@@ -45,7 +46,6 @@ extension FirebaseApiClient {
                 }
                 var diaries: [Diary] = []
                 documents.forEach { content in
-                    print(content.data())
                     do {
                         var diary = try Firestore.Decoder().decode(Diary.self, from: content.data())
                         // 明示的に代入しないとnilになる

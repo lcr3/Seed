@@ -28,8 +28,7 @@ extension SeedView {
 }
 
 extension DialySectionHeader {
-    static var preview = Self("Dialy") {
-    }
+    static var preview = Self("Diary")
 }
 
 extension CreateDiaryView {

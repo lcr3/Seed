@@ -15,7 +15,6 @@ struct CreateDiaryView: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            NavigationView() {
                 List {
                     HStack() {
                         Text("Title")
@@ -42,13 +41,8 @@ struct CreateDiaryView: View {
                 .navigationTitle("Write diary")
                 .navigationBarItems(trailing: Button("保存", action: {
                     ViewStore(store).send(.create)
-                }))
-            }
-            .onChange(of: viewStore.createFinish) { completed in
-                if completed {
                     presentationMode.dismiss()
-                }
-            }
+                }))
         }
     }
 }

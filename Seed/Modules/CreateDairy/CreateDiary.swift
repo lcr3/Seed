@@ -12,14 +12,10 @@ import Firebase
 struct CreateDairyState: Equatable {
     var title: String
     var content: String
-    var isLoading: Bool
-    var createFinish: Bool
 
     init() {
         title = ""
         content = ""
-        isLoading = false
-        createFinish = false
     }
 }
 
@@ -45,10 +41,8 @@ let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, CreateDair
         return .none
     case .create:
         if state.title.isEmpty && state.content.isEmpty {
-            state.createFinish = true
             return .none
         }
-        state.isLoading = true
         let newDiary = Diary(
             title: state.title,
             content: state.content,
@@ -60,12 +54,8 @@ let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, CreateDair
             .catchToEffect()
             .map(CreateDairyAction.createResponse)
     case let .createResponse(.success(result)):
-        state.isLoading = false
-        state.createFinish = true
         return .none
     case let .createResponse(.failure(failure)):
-        state.isLoading = false
         return .none
     }
-
 }

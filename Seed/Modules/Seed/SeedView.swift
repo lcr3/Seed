@@ -20,9 +20,26 @@ struct SeedView: View {
             NavigationView() {
                 VStack() {
                     List {
-                        Section(header: DialySectionHeader("Dialy", tapAction: {
-                            ViewStore(store).send(.addButtonTapped)
-                        })) {
+                        Section(header: HStack {
+                            Text("Diary")
+                            Spacer()
+                            NavigationLink(
+                                destination: CreateDiaryView(
+                                    store: Store(
+                                        initialState: CreateDairyState(),
+                                        reducer: createDairyReducer,
+                                        environment: CreateDairyEnvironment(
+                                            client: FirebaseApiClient.live,
+                                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                        )
+                                    )
+                                ),
+                                label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.body)
+                                }
+                            )
+                        }) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
                                 NavigationLink(
                                     destination: DiaryDetailView(
@@ -55,20 +72,6 @@ struct SeedView: View {
                         }
                     }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
-                }.sheet(isPresented: viewStore.binding(
-                            get: { $0.showCreateDiary } ,
-                            send: SeedAction.showedNewDiary)
-                ) {
-                    CreateDiaryView(
-                        store: Store(
-                            initialState: CreateDairyState(),
-                            reducer: createDairyReducer,
-                            environment: CreateDairyEnvironment(
-                                client: FirebaseApiClient.live,
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                            )
-                        )
-                    )
                 }
                 .alert(
                     store.scope(
