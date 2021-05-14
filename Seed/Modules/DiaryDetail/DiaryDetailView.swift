@@ -38,7 +38,6 @@ struct DiaryDetailView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Edit diary")
             .onDisappear {
                 viewStore.send(DiaryDetailAction.save)
             }

@@ -38,7 +38,6 @@ struct CreateDiaryView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Write diary")
             .navigationBarItems(
                 trailing: Button("保存") {
                     ViewStore(store).send(.create)
