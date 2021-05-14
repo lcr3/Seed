@@ -11,20 +11,16 @@ import Foundation
 
 struct SeedState: Equatable {
     public var diaries: [Diary]
-    public var showCreateDiary: Bool
     public var deleteDiaryAlertState: DeleteDiaryAlertState
 
     public init(deleteDiaryAlertState: DeleteDiaryAlertState) {
         diaries = []
-        showCreateDiary = false
         self.deleteDiaryAlertState = deleteDiaryAlertState
     }
 }
 
 enum SeedAction: Equatable {
-    case addButtonTapped
     case deleteButtonTapped(Int)
-    case showedNewDiary
     case startObserve
     case updateDiaries(Result<[Diary], FirebaseApiClient.ApiFailure>)
     case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
@@ -38,12 +34,6 @@ struct SeedEnvironment {
 
 let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, action, environment in
     switch action {
-    case .addButtonTapped:
-        state.showCreateDiary = true
-        return .none
-    case .showedNewDiary:
-        state.showCreateDiary = false
-        return .none
     case .startObserve:
         return environment.client
             .updateSnapshot()

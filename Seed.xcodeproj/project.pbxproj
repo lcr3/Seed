@@ -27,7 +27,6 @@
 		29188C1B264791910024BC36 /* CreateDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1A264791900024BC36 /* CreateDiary.swift */; };
 		29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1C2647A6460024BC36 /* CreateDiaryView.swift */; };
 		29AFC6A92648D8A70078A199 /* DeleteDiaryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */; };
-		29D1DF5726480070006CA27D /* DialySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D1DF5626480070006CA27D /* DialySectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +69,6 @@
 		29188C1A264791900024BC36 /* CreateDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiary.swift; sourceTree = "<group>"; };
 		29188C1C2647A6460024BC36 /* CreateDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryView.swift; sourceTree = "<group>"; };
 		29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDiaryAlert.swift; sourceTree = "<group>"; };
-		29D1DF5626480070006CA27D /* DialySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialySectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +185,6 @@
 			children = (
 				29188BFF26455BE80024BC36 /* SeedView.swift */,
 				29188C1726464CA10024BC36 /* Seed.swift */,
-				29D1DF5626480070006CA27D /* DialySectionHeader.swift */,
 				29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */,
 			);
 			path = Seed;
@@ -378,7 +375,6 @@
 				29188C1826464CA10024BC36 /* Seed.swift in Sources */,
 				29AFC6A92648D8A70078A199 /* DeleteDiaryAlert.swift in Sources */,
 				29188C06264574910024BC36 /* Diary.swift in Sources */,
-				29D1DF5726480070006CA27D /* DialySectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
