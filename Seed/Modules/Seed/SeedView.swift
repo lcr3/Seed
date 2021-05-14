@@ -17,8 +17,8 @@ struct SeedView: View {
     let store: Store<SeedState, SeedAction>
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            NavigationView() {
-                VStack() {
+            NavigationView {
+                VStack {
                     List {
                         Section(header: HStack {
                             Text("Diary")
@@ -33,12 +33,11 @@ struct SeedView: View {
                                             mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                                         )
                                     )
-                                ),
-                                label: {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.body)
-                                }
-                            )
+                                )
+                            ) {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.body)
+                            }
                         }) {
                             ForEach(viewStore.state.diaries, id: \.self) { diary in
                                 NavigationLink(
@@ -51,22 +50,21 @@ struct SeedView: View {
                                                 mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                                             )
                                         )
-                                    ),
-                                    label: {
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            Text(diary.title)
-                                                .bold()
-                                            Text(diary.content)
-                                                .font(.caption)
-                                                .lineLimit(1)
-                                                .foregroundColor(.gray)
-                                        }
-                                        .padding(.bottom, 8)
-                                        .padding(.top, 8)
+                                    )
+                                ) {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text(diary.title)
+                                            .bold()
+                                        Text(diary.content)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                            .foregroundColor(.gray)
                                     }
-                                )
+                                    .padding(.bottom, 8)
+                                    .padding(.top, 8)
+                                }
                             }.onDelete { offsets in
-                                let index = offsets.first!
+                                guard let index = offsets.first else { return }
                                 ViewStore(store).send(.deleteButtonTapped(index))
                             }
                         }

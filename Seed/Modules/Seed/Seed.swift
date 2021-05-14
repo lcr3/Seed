@@ -49,7 +49,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
     case let .deleteButtonTapped(index):
         let targetDiary = state.diaries[index]
         guard let documentId = targetDiary.id else {
-            fatalError("")
+            fatalError("Document id is empty.")
         }
         state.deleteDiaryAlertState.documentId = documentId
         state.deleteDiaryAlertState.alert = .init(

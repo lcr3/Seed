@@ -15,34 +15,36 @@ struct CreateDiaryView: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-                List {
-                    HStack() {
-                        Text("Title")
-                        TextField(
-                            "What happened today...",
-                            text: viewStore.binding(
-                                get: \.title,
-                                send: CreateDairyAction.changeTitle
-                            )
+            List {
+                HStack {
+                    Text("Title")
+                    TextField(
+                        "What happened today...",
+                        text: viewStore.binding(
+                            get: \.title,
+                            send: CreateDairyAction.changeTitle
                         )
-                        .multilineTextAlignment(.trailing)
-                    }
-                    Section(header: Text("Contents")) {
-                        TextEditor(
-                            text: viewStore.binding(
-                                get: \.content,
-                                send: CreateDairyAction.changeContent
-                            )
-                        )
-                        .frame(height: 500)
-                    }
+                    )
+                    .multilineTextAlignment(.trailing)
                 }
-                .listStyle(InsetGroupedListStyle())
-                .navigationTitle("Write diary")
-                .navigationBarItems(trailing: Button("保存", action: {
+                Section(header: Text("Contents")) {
+                    TextEditor(
+                        text: viewStore.binding(
+                            get: \.content,
+                            send: CreateDairyAction.changeContent
+                        )
+                    )
+                    .frame(height: 500)
+                }
+            }
+            .listStyle(InsetGroupedListStyle())
+            .navigationTitle("Write diary")
+            .navigationBarItems(
+                trailing: Button("保存") {
                     ViewStore(store).send(.create)
                     presentationMode.dismiss()
-                }))
+                }
+            )
         }
     }
 }
