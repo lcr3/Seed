@@ -34,7 +34,6 @@ struct DiaryDetailView: View {
                             send: DiaryDetailAction.editContent
                         )
                     )
-                    .frame(height: 500)
                 }
             }
             .listStyle(InsetGroupedListStyle())

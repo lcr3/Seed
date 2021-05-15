@@ -34,7 +34,6 @@ struct CreateDiaryView: View {
                             send: CreateDairyAction.changeContent
                         )
                     )
-                    .frame(height: 500)
                 }
             }
             .listStyle(InsetGroupedListStyle())
