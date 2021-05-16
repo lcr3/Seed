@@ -10,11 +10,23 @@ import ComposableArchitecture
 import Foundation
 
 struct SeedState: Equatable {
-    public var diaries: [Diary]
+    public var currentDiaries: [Diary]
+    public var diaries: [Diary] {
+        if searchText.isEmpty {
+            return currentDiaries
+        }
+        return currentDiaries.filter {
+            $0.title.contains(searchText) || $0.content.contains(searchText)
+        }
+    }
+    public var searchText: String
     public var deleteDiaryAlertState: DeleteDiaryAlertState
+    public var isSearching: Bool
 
     public init(deleteDiaryAlertState: DeleteDiaryAlertState) {
-        diaries = []
+        currentDiaries = []
+        searchText = ""
+        isSearching = false
         self.deleteDiaryAlertState = deleteDiaryAlertState
     }
 }
@@ -22,6 +34,8 @@ struct SeedState: Equatable {
 enum SeedAction: Equatable {
     case deleteButtonTapped(Int)
     case startObserve
+    case chageSearchText(String)
+    case resetSearchText
     case updateDiaries(Result<[Diary], FirebaseApiClient.ApiFailure>)
     case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
     case deleteAlert(DeleteDiaryAlertAction)
@@ -34,6 +48,14 @@ struct SeedEnvironment {
 
 let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, action, environment in
     switch action {
+    case let .chageSearchText(text):
+        state.searchText = text
+        state.isSearching = !state.searchText.isEmpty
+        return .none
+    case .resetSearchText:
+        state.searchText = ""
+        state.isSearching = false
+        return .none
     case .startObserve:
         return environment.client
             .updateSnapshot()
@@ -41,7 +63,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
             .catchToEffect()
             .map(SeedAction.updateDiaries)
     case let .updateDiaries(.success(diaries)):
-        state.diaries = diaries
+        state.currentDiaries = diaries
         return .none
     case let .updateDiaries(.failure(failure)):
         print("error: \(failure)")
