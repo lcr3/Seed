@@ -14,12 +14,36 @@ struct SeedView: View {
         self.store = store
         ViewStore(store).send(.startObserve)
     }
+    private var isSearch = false
     let store: Store<SeedState, SeedAction>
     var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
                 VStack {
                     List {
+                        Section {
+                            HStack {
+                                Image(systemName: "magnifyingglass")
+                                    .padding(.leading, -12)
+                                TextField("検索",
+                                          text: viewStore.binding(
+                                            get: \.searchText,
+                                            send: SeedAction.chageSearchText)
+                                )
+                            }
+                            .overlay(
+                                HStack {
+                                    Spacer()
+                                    if viewStore.state.isSearching {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(.gray)
+                                            .onTapGesture {
+                                                ViewStore(store).send(SeedAction.resetSearchText)
+                                            }
+                                    }
+                                }
+                            )
+                        }
                         Section(header: HStack {
                             Text("Diary")
                             Spacer()
