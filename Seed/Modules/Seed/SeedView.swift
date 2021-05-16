@@ -24,6 +24,7 @@ struct SeedView: View {
                         Section {
                             HStack {
                                 Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.systemGray)
                                     .padding(.leading, -12)
                                 TextField("検索",
                                           text: viewStore.binding(
@@ -36,7 +37,7 @@ struct SeedView: View {
                                     Spacer()
                                     if viewStore.state.isSearching {
                                         Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(.systemGray)
                                             .onTapGesture {
                                                 ViewStore(store).send(SeedAction.resetSearchText)
                                             }
