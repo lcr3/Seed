@@ -84,9 +84,9 @@ extension FirebaseApiClient {
             return AnyCancellable {
             }
         }
-    } create: { diary in
+    } create: { title, content, userId in
         .future { callback in
-            callback(.success(true))
+            callback(.success(""))
         }
     } delete: { documentId in
         .future { callback in

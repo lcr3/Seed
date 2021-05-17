@@ -15,7 +15,7 @@ import Foundation
 struct FirebaseApiClient {
     private static let diaries = "diaries"
     public var updateSnapshot: () -> Effect<[Diary], ApiFailure>
-    public var create: (_ diary: Diary) -> Effect<Bool, ApiFailure>
+    public var create: (_ title: String, _ content: String, _ userId: Int) -> Effect<String, ApiFailure>
     public var delete: (_ documentId: String) -> Effect<String, ApiFailure>
     public var update: (_ diary: Diary) -> Effect<String, ApiFailure>
 
@@ -65,18 +65,22 @@ extension FirebaseApiClient {
                 print("cancel")
             }
         }
-    } create: { diary in
+    } create: { title, content, userId in
         .future { callback in
-            Firestore.firestore().collection(Self.diaries).addDocument(data: [
-                "title": diary.title,
-                "content": diary.content,
-                "user_id": 1,
+            var ref: DocumentReference? = nil
+            ref = Firestore.firestore().collection(Self.diaries).addDocument(data: [
+                "title": title,
+                "content": content,
+                "user_id": userId,
                 "created_at": Timestamp(date: Date())
             ]) { error in
                 if let error = error {
                     callback(.failure(.init(message: "Create diary error")))
                 }
-                callback(.success(true))
+                if let documentId = ref?.documentID {
+                    callback(.success(documentId))
+                }
+                callback(.failure(.init(message: "Failed create diary")))
             }
         }
     } delete: { documentId in
