@@ -42,7 +42,11 @@ struct CreateDiaryView: View {
                     ViewStore(store).send(.create)
                     presentationMode.dismiss()
                 }
-            )
+            ).onAppear {
+                if viewStore.state.documentId.isEmpty {
+                    viewStore.send(CreateDairyAction.create)
+                }
+            }
         }
     }
 }
