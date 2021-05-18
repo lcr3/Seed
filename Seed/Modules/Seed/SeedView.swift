@@ -88,6 +88,14 @@ struct SeedView: View {
                                     .padding(.bottom, 8)
                                     .padding(.top, 8)
                                 }
+                                .contextMenu(
+                                    menuItems: {
+                                        HStack {
+                                            Text(diary.title)
+                                            Text(diary.content)
+                                        }
+                                    }
+                                )
                             }.onDelete { offsets in
                                 guard let index = offsets.first else { return }
                                 ViewStore(store).send(.deleteButtonTapped(index))
