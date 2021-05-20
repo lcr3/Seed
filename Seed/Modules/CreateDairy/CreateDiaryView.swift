@@ -16,8 +16,7 @@ struct CreateDiaryView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             List {
-                HStack {
-                    Text("Title")
+                Section(header: Text("Title")) {
                     TextField(
                         "What happened today...",
                         text: viewStore.binding(
