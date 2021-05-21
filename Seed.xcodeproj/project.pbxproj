@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2905760B264A1EB80062C689 /* DiaryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905760A264A1EB80062C689 /* DiaryDetail.swift */; };
 		2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905760C264A4E9E0062C689 /* DiaryDetailView.swift */; };
 		29057618265150920062C689 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057617265150920062C689 /* Color.swift */; };
 		29188BD0264540EF0024BC36 /* SeedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BCF264540EF0024BC36 /* SeedApp.swift */; };
@@ -16,7 +15,6 @@
 		29188BE2264540F20024BC36 /* SeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BE1264540F20024BC36 /* SeedTests.swift */; };
 		29188BED264540F20024BC36 /* SeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BEC264540F20024BC36 /* SeedUITests.swift */; };
 		29188BFE26455BB10024BC36 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BFD26455BB10024BC36 /* Mock.swift */; };
-		29188C0026455BE80024BC36 /* SeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188BFF26455BE80024BC36 /* SeedView.swift */; };
 		29188C06264574910024BC36 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C05264574910024BC36 /* Diary.swift */; };
 		29188C0B264580B00024BC36 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 29188C0A264580B00024BC36 /* FirebaseAuth */; };
 		29188C0D264580B00024BC36 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 29188C0C264580B00024BC36 /* FirebaseFirestore */; };
@@ -24,10 +22,9 @@
 		29188C11264627920024BC36 /* FirebaseApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C10264627910024BC36 /* FirebaseApiClient.swift */; };
 		29188C1326462AB20024BC36 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29188C1226462AB20024BC36 /* GoogleService-Info.plist */; };
 		29188C16264633AB0024BC36 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 29188C15264633AB0024BC36 /* ComposableArchitecture */; };
-		29188C1826464CA10024BC36 /* Seed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1726464CA10024BC36 /* Seed.swift */; };
-		29188C1B264791910024BC36 /* CreateDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1A264791900024BC36 /* CreateDiary.swift */; };
 		29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1C2647A6460024BC36 /* CreateDiaryView.swift */; };
-		29AFC6A92648D8A70078A199 /* DeleteDiaryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */; };
+		29977244265745C2005C38CC /* SeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29977241265745C2005C38CC /* SeedView.swift */; };
+		29977245265745C2005C38CC /* DeleteDiaryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29977242265745C2005C38CC /* DeleteDiaryAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2905760A264A1EB80062C689 /* DiaryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetail.swift; sourceTree = "<group>"; };
 		2905760C264A4E9E0062C689 /* DiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailView.swift; sourceTree = "<group>"; };
 		29057617265150920062C689 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		29188BCC264540EF0024BC36 /* Seed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,14 +59,12 @@
 		29188BEC264540F20024BC36 /* SeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedUITests.swift; sourceTree = "<group>"; };
 		29188BEE264540F20024BC36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29188BFD26455BB10024BC36 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
-		29188BFF26455BE80024BC36 /* SeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedView.swift; sourceTree = "<group>"; };
 		29188C05264574910024BC36 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		29188C10264627910024BC36 /* FirebaseApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseApiClient.swift; sourceTree = "<group>"; };
 		29188C1226462AB20024BC36 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		29188C1726464CA10024BC36 /* Seed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seed.swift; sourceTree = "<group>"; };
-		29188C1A264791900024BC36 /* CreateDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiary.swift; sourceTree = "<group>"; };
 		29188C1C2647A6460024BC36 /* CreateDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryView.swift; sourceTree = "<group>"; };
-		29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDiaryAlert.swift; sourceTree = "<group>"; };
+		29977241265745C2005C38CC /* SeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedView.swift; sourceTree = "<group>"; };
+		29977242265745C2005C38CC /* DeleteDiaryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDiaryAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,15 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		29057609264A1E8C0062C689 /* DiaryDetail */ = {
-			isa = PBXGroup;
-			children = (
-				2905760A264A1EB80062C689 /* DiaryDetail.swift */,
-				2905760C264A4E9E0062C689 /* DiaryDetailView.swift */,
-			);
-			path = DiaryDetail;
-			sourceTree = "<group>";
-		};
 		290576162651507B0062C689 /* Utill */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,11 +127,9 @@
 		29188BCE264540EF0024BC36 /* Seed */ = {
 			isa = PBXGroup;
 			children = (
+				2997723D265744A9005C38CC /* Sources */,
 				29188C1226462AB20024BC36 /* GoogleService-Info.plist */,
-				29188C03264574770024BC36 /* Network */,
-				29188BFA26455B4B0024BC36 /* Modules */,
 				290576162651507B0062C689 /* Utill */,
-				29188BCF264540EF0024BC36 /* SeedApp.swift */,
 				29188BD3264540F20024BC36 /* Assets.xcassets */,
 				29188BD8264540F20024BC36 /* Info.plist */,
 				29188BD5264540F20024BC36 /* Preview Content */,
@@ -180,27 +163,6 @@
 			path = SeedUITests;
 			sourceTree = "<group>";
 		};
-		29188BFA26455B4B0024BC36 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				29188C19264791560024BC36 /* CreateDairy */,
-				29188BFC26455B930024BC36 /* Preview */,
-				29188BFB26455B580024BC36 /* Seed */,
-				29057609264A1E8C0062C689 /* DiaryDetail */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		29188BFB26455B580024BC36 /* Seed */ = {
-			isa = PBXGroup;
-			children = (
-				29188BFF26455BE80024BC36 /* SeedView.swift */,
-				29188C1726464CA10024BC36 /* Seed.swift */,
-				29AFC6A82648D8A70078A199 /* DeleteDiaryAlert.swift */,
-			);
-			path = Seed;
-			sourceTree = "<group>";
-		};
 		29188BFC26455B930024BC36 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,30 +171,59 @@
 			path = Preview;
 			sourceTree = "<group>";
 		};
-		29188C03264574770024BC36 /* Network */ = {
+		2997723D265744A9005C38CC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				29188C04264574830024BC36 /* Entity */,
-				29188C10264627910024BC36 /* FirebaseApiClient.swift */,
+				299772492657477A005C38CC /* AppFeature */,
+				2997723E265744D0005C38CC /* APIClient */,
+				29977247265746E7005C38CC /* CreateDairyFeature */,
+				2997724826574714005C38CC /* DiaryDetailFeature */,
+				29977240265745C2005C38CC /* SeedFeature */,
+				29188BFC26455B930024BC36 /* Preview */,
 			);
-			path = Network;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		29188C04264574830024BC36 /* Entity */ = {
+		2997723E265744D0005C38CC /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				29188C10264627910024BC36 /* FirebaseApiClient.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		29977240265745C2005C38CC /* SeedFeature */ = {
 			isa = PBXGroup;
 			children = (
 				29188C05264574910024BC36 /* Diary.swift */,
+				29977241265745C2005C38CC /* SeedView.swift */,
+				29977242265745C2005C38CC /* DeleteDiaryAlert.swift */,
 			);
-			path = Entity;
+			path = SeedFeature;
 			sourceTree = "<group>";
 		};
-		29188C19264791560024BC36 /* CreateDairy */ = {
+		29977247265746E7005C38CC /* CreateDairyFeature */ = {
 			isa = PBXGroup;
 			children = (
-				29188C1A264791900024BC36 /* CreateDiary.swift */,
 				29188C1C2647A6460024BC36 /* CreateDiaryView.swift */,
 			);
-			path = CreateDairy;
+			path = CreateDairyFeature;
+			sourceTree = "<group>";
+		};
+		2997724826574714005C38CC /* DiaryDetailFeature */ = {
+			isa = PBXGroup;
+			children = (
+				2905760C264A4E9E0062C689 /* DiaryDetailView.swift */,
+			);
+			path = DiaryDetailFeature;
+			sourceTree = "<group>";
+		};
+		299772492657477A005C38CC /* AppFeature */ = {
+			isa = PBXGroup;
+			children = (
+				29188BCF264540EF0024BC36 /* SeedApp.swift */,
+			);
+			path = AppFeature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,16 +388,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */,
-				29188C1B264791910024BC36 /* CreateDiary.swift in Sources */,
-				29188C0026455BE80024BC36 /* SeedView.swift in Sources */,
+				29977244265745C2005C38CC /* SeedView.swift in Sources */,
+				29977245265745C2005C38CC /* DeleteDiaryAlert.swift in Sources */,
 				2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */,
 				29188C11264627920024BC36 /* FirebaseApiClient.swift in Sources */,
 				29057618265150920062C689 /* Color.swift in Sources */,
-				2905760B264A1EB80062C689 /* DiaryDetail.swift in Sources */,
 				29188BD0264540EF0024BC36 /* SeedApp.swift in Sources */,
 				29188BFE26455BB10024BC36 /* Mock.swift in Sources */,
-				29188C1826464CA10024BC36 /* Seed.swift in Sources */,
-				29AFC6A92648D8A70078A199 /* DeleteDiaryAlert.swift in Sources */,
 				29188C06264574910024BC36 /* Diary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
