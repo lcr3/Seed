@@ -67,7 +67,7 @@ extension FirebaseApiClient {
         }
     } create: { title, content, userId in
         .future { callback in
-            var ref: DocumentReference? = nil
+            var ref: DocumentReference?
             ref = Firestore.firestore().collection(Self.diaries).addDocument(data: [
                 "title": title,
                 "content": content,
