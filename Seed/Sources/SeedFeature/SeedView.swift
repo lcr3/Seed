@@ -88,19 +88,22 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
     case let .deleteResponse(.failure(error)):
         state.deleteDiaryAlertState.documentId = ""
         return .none
-    case .deleteAlert(.okButtonTapped):
-        state.deleteDiaryAlertState.alert = nil
-        return environment.client
-            .delete(state.deleteDiaryAlertState.documentId)
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .map(SeedAction.deleteResponse)
-    case .deleteAlert(.cancelButtonTapped):
-        state.deleteDiaryAlertState.alert = nil
-        return .none
-    case .deleteAlert(.dismissAlert):
-        state.deleteDiaryAlertState.alert = nil
-        return .none
+    case .deleteAlert(let action):
+        switch action {
+        case .okButtonTapped:
+            state.deleteDiaryAlertState.alert = nil
+            return environment.client
+                .delete(state.deleteDiaryAlertState.documentId)
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(SeedAction.deleteResponse)
+        case .cancelButtonTapped:
+            state.deleteDiaryAlertState.alert = nil
+            return .none
+        case .dismissAlert:
+            state.deleteDiaryAlertState.alert = nil
+            return .none
+        }
     }
 }
 
@@ -170,19 +173,20 @@ struct SeedView: View {
                                                 mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                                             )
                                         )
-                                    )
-                                ) {
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        Text(diary.title)
-                                            .bold()
-                                        Text(diary.content)
-                                            .font(.caption)
-                                            .lineLimit(1)
-                                            .foregroundColor(.gray)
+                                    ),
+                                    label: {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            Text(diary.title)
+                                                .bold()
+                                            Text(diary.content)
+                                                .font(.caption)
+                                                .lineLimit(1)
+                                                .foregroundColor(.gray)
+                                        }
+                                        .padding(.bottom, 8)
+                                        .padding(.top, 8)
                                     }
-                                    .padding(.bottom, 8)
-                                    .padding(.top, 8)
-                                }
+                                )
                                 .contextMenu(
                                     menuItems: {
                                         HStack {
