@@ -19,12 +19,15 @@ struct SeedApp: App {
     var body: some Scene {
         WindowGroup {
             SeedView(
-                store: Store(initialState: SeedState(deleteDiaryAlertState: DeleteDiaryAlertState(documentId: "")),
-                             reducer: seedReducer,
-                             environment: SeedEnvironment(
-                                client: FirebaseApiClient.live,
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                             )
+                store: Store(
+                    initialState: SeedState(
+                        deleteDiaryAlertState: DeleteDiaryAlertState()
+                    ),
+                    reducer: seedReducer,
+                    environment: SeedEnvironment(
+                        client: FirebaseApiClient.live,
+                        mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                    )
                 )
             )
         }
