@@ -15,8 +15,7 @@ extension SeedView {
     static var preview = SeedView(
         store: Store(
             initialState: SeedState(
-                deleteDiaryAlertState: DeleteDiaryAlertState(
-                    documentId: "")
+                deleteDiaryAlertState: DeleteDiaryAlertState()
             ),
             reducer: seedReducer,
             environment: SeedEnvironment(

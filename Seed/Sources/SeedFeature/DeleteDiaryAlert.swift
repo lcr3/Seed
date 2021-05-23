@@ -12,6 +12,10 @@ import Foundation
 struct DeleteDiaryAlertState: Equatable {
     var documentId: String
     var alert: AlertState<DeleteDiaryAlertAction>?
+
+    init() {
+        documentId = ""
+    }
 }
 
 enum DeleteDiaryAlertAction: Equatable {
