@@ -6,7 +6,9 @@
 //  
 //
 
+import ComposableArchitecture
 import XCTest
+
 @testable import Seed
 
 class SeedTests: XCTestCase {
@@ -19,16 +21,52 @@ class SeedTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testChageSearchText() throws {
+        // setup
+        let store = TestStore(
+            initialState: SeedState(),
+            reducer: seedReducer,
+            environment: SeedEnvironment(
+                client: .mock,
+                mainQueue: DispatchQueue.immediate.eraseToAnyScheduler()
+            )
+        )
+        let text = "searchText"
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        // execute
+        store.send(.chageSearchText(text)) {
+            // verify
+            $0.searchText = text
+            $0.isSearching = true
+        }
+
+        store.send(.chageSearchText("")) {
+            // verify
+            $0.searchText = ""
+            $0.isSearching = false
         }
     }
 
+    func testResetSearchText() throws {
+        // setup
+        let store = TestStore(
+            initialState: SeedState(),
+            reducer: seedReducer,
+            environment: SeedEnvironment(
+                client: .mock,
+                mainQueue: DispatchQueue.immediate.eraseToAnyScheduler()
+            )
+        )
+        store.send(.chageSearchText("test")) {
+            $0.searchText = "test"
+            $0.isSearching = true
+        }
+
+        // execute
+        store.send(.resetSearchText) {
+            // verify
+            $0.searchText = ""
+            $0.isSearching = false
+        }
+    }
 }
