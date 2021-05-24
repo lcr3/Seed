@@ -20,9 +20,7 @@ struct SeedApp: App {
         WindowGroup {
             SeedView(
                 store: Store(
-                    initialState: SeedState(
-                        deleteDiaryAlertState: DeleteDiaryAlertState()
-                    ),
+                    initialState: SeedState(),
                     reducer: seedReducer,
                     environment: SeedEnvironment(
                         client: FirebaseApiClient.live,
