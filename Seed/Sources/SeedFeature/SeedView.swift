@@ -20,14 +20,12 @@ struct SeedState: Equatable {
         }
     }
     public var searchText: String
-    public var deleteDiaryAlertState: DeleteDiaryAlertState
     public var isSearching: Bool
 
-    public init(deleteDiaryAlertState: DeleteDiaryAlertState) {
+    public init() {
         diaries = []
         searchText = ""
         isSearching = false
-        self.deleteDiaryAlertState = deleteDiaryAlertState
     }
 }
 
@@ -38,7 +36,6 @@ enum SeedAction: Equatable {
     case resetSearchText
     case updateDiaries(Result<[Diary], FirebaseApiClient.ApiFailure>)
     case deleteResponse(Result<String, FirebaseApiClient.ApiFailure>)
-    case deleteAlert(DeleteDiaryAlertAction)
 }
 
 struct SeedEnvironment {
@@ -73,37 +70,15 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
         guard let documentId = targetDiary.id else {
             fatalError("Document id is empty.")
         }
-        state.deleteDiaryAlertState.documentId = documentId
-        state.deleteDiaryAlertState.alert = .init(
-            title: TextState("⚠削除してもよろしいですか?"),
-            message: TextState(targetDiary.title),
-            primaryButton: .default(.init("OK"),
-                                    send: .okButtonTapped),
-            secondaryButton: .cancel()
-        )
-        return .none
+        return environment.client
+            .delete(documentId)
+            .receive(on: environment.mainQueue)
+            .catchToEffect()
+            .map(SeedAction.deleteResponse)
     case let .deleteResponse(.success(documentId)):
-        state.deleteDiaryAlertState.documentId = ""
         return .none
     case let .deleteResponse(.failure(error)):
-        state.deleteDiaryAlertState.documentId = ""
         return .none
-    case .deleteAlert(let action):
-        switch action {
-        case .okButtonTapped:
-            state.deleteDiaryAlertState.alert = nil
-            return environment.client
-                .delete(state.deleteDiaryAlertState.documentId)
-                .receive(on: environment.mainQueue)
-                .catchToEffect()
-                .map(SeedAction.deleteResponse)
-        case .cancelButtonTapped:
-            state.deleteDiaryAlertState.alert = nil
-            return .none
-        case .dismissAlert:
-            state.deleteDiaryAlertState.alert = nil
-            return .none
-        }
     }
 }
 
@@ -203,13 +178,6 @@ struct SeedView: View {
                     }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
                 }
-                .alert(
-                    store.scope(
-                        state: { $0.deleteDiaryAlertState.alert },
-                        action: SeedAction.deleteAlert
-                    ),
-                    dismiss: DeleteDiaryAlertAction.dismissAlert
-                )
                 .navigationTitle("Seed")
             }
         }

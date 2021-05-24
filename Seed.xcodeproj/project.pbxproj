@@ -24,7 +24,6 @@
 		29188C16264633AB0024BC36 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 29188C15264633AB0024BC36 /* ComposableArchitecture */; };
 		29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1C2647A6460024BC36 /* CreateDiaryView.swift */; };
 		29977244265745C2005C38CC /* SeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29977241265745C2005C38CC /* SeedView.swift */; };
-		29977245265745C2005C38CC /* DeleteDiaryAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29977242265745C2005C38CC /* DeleteDiaryAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +63,6 @@
 		29188C1226462AB20024BC36 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29188C1C2647A6460024BC36 /* CreateDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryView.swift; sourceTree = "<group>"; };
 		29977241265745C2005C38CC /* SeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedView.swift; sourceTree = "<group>"; };
-		29977242265745C2005C38CC /* DeleteDiaryAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDiaryAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +195,6 @@
 			children = (
 				29188C05264574910024BC36 /* Diary.swift */,
 				29977241265745C2005C38CC /* SeedView.swift */,
-				29977242265745C2005C38CC /* DeleteDiaryAlert.swift */,
 			);
 			path = SeedFeature;
 			sourceTree = "<group>";
@@ -389,7 +386,6 @@
 			files = (
 				29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */,
 				29977244265745C2005C38CC /* SeedView.swift in Sources */,
-				29977245265745C2005C38CC /* DeleteDiaryAlert.swift in Sources */,
 				2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */,
 				29188C11264627920024BC36 /* FirebaseApiClient.swift in Sources */,
 				29057618265150920062C689 /* Color.swift in Sources */,
