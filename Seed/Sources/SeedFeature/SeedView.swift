@@ -10,12 +10,12 @@ import ComposableArchitecture
 import SwiftUI
 
 struct SeedState: Equatable {
-    public var currentDiaries: [Diary]
-    public var diaries: [Diary] {
+    public var diaries: [Diary]
+    public var filteredDiaries: [Diary] {
         if searchText.isEmpty {
-            return currentDiaries
+            return diaries
         }
-        return currentDiaries.filter {
+        return diaries.filter {
             $0.title.contains(searchText) || $0.content.contains(searchText)
         }
     }
@@ -24,7 +24,7 @@ struct SeedState: Equatable {
     public var isSearching: Bool
 
     public init(deleteDiaryAlertState: DeleteDiaryAlertState) {
-        currentDiaries = []
+        diaries = []
         searchText = ""
         isSearching = false
         self.deleteDiaryAlertState = deleteDiaryAlertState
@@ -63,7 +63,7 @@ let seedReducer = Reducer<SeedState, SeedAction, SeedEnvironment> { state, actio
             .catchToEffect()
             .map(SeedAction.updateDiaries)
     case let .updateDiaries(.success(diaries)):
-        state.currentDiaries = diaries
+        state.diaries = diaries
         return .none
     case let .updateDiaries(.failure(failure)):
         print("error: \(failure)")
@@ -162,7 +162,7 @@ struct SeedView: View {
                                     .font(.body)
                             }
                         }) {
-                            ForEach(viewStore.state.diaries, id: \.self) { diary in
+                            ForEach(viewStore.state.filteredDiaries, id: \.self) { diary in
                                 NavigationLink(
                                     destination: DiaryDetailView(
                                         store: Store(
