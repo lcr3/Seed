@@ -146,7 +146,7 @@
 		29188BE0264540F20024BC36 /* SeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				29188BE1264540F20024BC36 /* SeedTests.swift */,
+				2987E714265CC507003C8234 /* Sources */,
 				29188BE3264540F20024BC36 /* Info.plist */,
 			);
 			path = SeedTests;
@@ -167,6 +167,22 @@
 				29188BFD26455BB10024BC36 /* Mock.swift */,
 			);
 			path = Preview;
+			sourceTree = "<group>";
+		};
+		2987E714265CC507003C8234 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2987E715265CC510003C8234 /* SeedFeature */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		2987E715265CC510003C8234 /* SeedFeature */ = {
+			isa = PBXGroup;
+			children = (
+				29188BE1264540F20024BC36 /* SeedTests.swift */,
+			);
+			path = SeedFeature;
 			sourceTree = "<group>";
 		};
 		2997723D265744A9005C38CC /* Sources */ = {
