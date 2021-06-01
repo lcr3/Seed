@@ -88,6 +88,7 @@ struct SeedView: View {
         ViewStore(store).send(.startObserve)
     }
     private var isSearch = false
+    @State var isSetting = false
     let store: Store<SeedState, SeedAction>
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -179,6 +180,12 @@ struct SeedView: View {
                     .listStyle(InsetGroupedListStyle())
                 }
                 .navigationTitle("Seed")
+                .navigationBarItems(leading:
+                                        Button(action: {
+                                            isSetting = true
+                                        }) {
+                                            Image(systemName: "􀣋")
+                                        })
             }
         }
     }
