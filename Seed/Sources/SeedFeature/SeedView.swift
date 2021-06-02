@@ -179,15 +179,33 @@ struct SeedView: View {
                     }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
                 }
-                .navigationTitle("Seed")
-                .navigationBarItems(leading:
-                                        Button(action: {
-                                            isSetting = true
-                                        }) {
-                                            Image(systemName: "􀣋")
-                                        })
+                .sheet(isPresented: $isSetting) {
+                    SettingView(
+                        store: Store(
+                            initialState: SettingState(),
+                            reducer: settingReducer,
+                            environment: SettingEnvironment(
+                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                            )
+                        )
+                    )
+                }
+                .navigationBarItems(
+                    leading: HStack {
+                        Spacer()
+                        Button(action: {
+                            isSetting = true
+                        }) {
+                            Image(systemName: "gearshape")
+                        }
+                    }
+                )
             }
         }
+    }
+
+    func didDismiss() {
+
     }
 }
 
