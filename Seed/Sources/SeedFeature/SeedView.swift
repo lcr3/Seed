@@ -88,6 +88,7 @@ struct SeedView: View {
         ViewStore(store).send(.startObserve)
     }
     private var isSearch = false
+    @State var isSetting = false
     let store: Store<SeedState, SeedAction>
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -178,9 +179,33 @@ struct SeedView: View {
                     }.animation(.easeIn)
                     .listStyle(InsetGroupedListStyle())
                 }
-                .navigationTitle("Seed")
+                .sheet(isPresented: $isSetting) {
+                    SettingView(
+                        store: Store(
+                            initialState: SettingState(),
+                            reducer: settingReducer,
+                            environment: SettingEnvironment(
+                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                            )
+                        )
+                    )
+                }
+                .navigationBarItems(
+                    leading: HStack {
+                        Spacer()
+                        Button(action: {
+                            isSetting = true
+                        }) {
+                            Image(systemName: "gearshape")
+                        }
+                    }
+                )
             }
         }
+    }
+
+    func didDismiss() {
+
     }
 }
 

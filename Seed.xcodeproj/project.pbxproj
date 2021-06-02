@@ -25,6 +25,7 @@
 		29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29188C1C2647A6460024BC36 /* CreateDiaryView.swift */; };
 		2987E718265E3153003C8234 /* CreateDairyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2987E717265E3153003C8234 /* CreateDairyTests.swift */; };
 		2992AE34265E6DA0009C2AA6 /* DiaryDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992AE33265E6DA0009C2AA6 /* DiaryDetailTests.swift */; };
+		2992AF2D26661306009C2AA6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992AF2C26661306009C2AA6 /* SettingView.swift */; };
 		29977244265745C2005C38CC /* SeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29977241265745C2005C38CC /* SeedView.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		29188C1C2647A6460024BC36 /* CreateDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryView.swift; sourceTree = "<group>"; };
 		2987E717265E3153003C8234 /* CreateDairyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDairyTests.swift; sourceTree = "<group>"; };
 		2992AE33265E6DA0009C2AA6 /* DiaryDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDetailTests.swift; sourceTree = "<group>"; };
+		2992AF2C26661306009C2AA6 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		29977241265745C2005C38CC /* SeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,9 +209,18 @@
 			path = DiaryDetailFeature;
 			sourceTree = "<group>";
 		};
+		2992AF2B266612DD009C2AA6 /* SeetingFeature */ = {
+			isa = PBXGroup;
+			children = (
+				2992AF2C26661306009C2AA6 /* SettingView.swift */,
+			);
+			path = SeetingFeature;
+			sourceTree = "<group>";
+		};
 		2997723D265744A9005C38CC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2992AF2B266612DD009C2AA6 /* SeetingFeature */,
 				299772492657477A005C38CC /* AppFeature */,
 				2997723E265744D0005C38CC /* APIClient */,
 				29977247265746E7005C38CC /* CreateDairyFeature */,
@@ -425,6 +436,7 @@
 				29188C1D2647A6460024BC36 /* CreateDiaryView.swift in Sources */,
 				29977244265745C2005C38CC /* SeedView.swift in Sources */,
 				2905760D264A4E9E0062C689 /* DiaryDetailView.swift in Sources */,
+				2992AF2D26661306009C2AA6 /* SettingView.swift in Sources */,
 				29188C11264627920024BC36 /* FirebaseApiClient.swift in Sources */,
 				29057618265150920062C689 /* Color.swift in Sources */,
 				29188BD0264540EF0024BC36 /* SeedApp.swift in Sources */,

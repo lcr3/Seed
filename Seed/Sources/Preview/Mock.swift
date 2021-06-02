@@ -58,6 +58,18 @@ extension DiaryDetailView {
     )
 }
 
+extension SettingView {
+    static var preview = SettingView(
+        store: Store(
+            initialState: SettingState(),
+            reducer: settingReducer,
+            environment: SettingEnvironment(
+                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+            )
+        )
+    )
+}
+
 extension FirebaseApiClient {
     public static let mock = FirebaseApiClient() {
         .run { subscriber in
