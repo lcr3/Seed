@@ -32,15 +32,21 @@ struct SettingView: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            NavigationView {
-                List {
-                    Section {
-                        Text("Icon")
+            List {
+                Section {
+                    HStack {
+                        Text("Theme")
+                        Spacer()
+                        Text("Automatic")
+                            .foregroundColor(.systemGray)
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.systemGray)
                     }
+                }
+                .onTapGesture {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Setting")
         }
     }
 }

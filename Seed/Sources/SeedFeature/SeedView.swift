@@ -191,14 +191,12 @@ struct SeedView: View {
                     )
                 }
                 .navigationBarItems(
-                    leading: HStack {
-                        Spacer()
+                    trailing:
                         Button(action: {
                             isSetting = true
                         }) {
                             Image(systemName: "gearshape")
                         }
-                    }
                 )
             }
         }
