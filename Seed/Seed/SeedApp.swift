@@ -6,26 +6,27 @@
 //  
 //
 
-//import ComposableArchitecture
-//import Firebase
+import ComposableArchitecture
+import Firebase
+import FirebaseApiClient
 import SeedFeature
 import SwiftUI
 
 @main
 struct SeedApp: App {
     init() {
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
     }
 
     var body: some Scene {
         WindowGroup {
             SeedView(
-                store: Store(
-                    initialState: SeedState(),
+                store: .init(
+                    initialState: .init(),
                     reducer: seedReducer,
-                    environment: SeedEnvironment(
-                        client: FirebaseApiClient.live,
-                        mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                    environment: .init(
+                        client: .live,
+                        mainQueue: .main.eraseToAnyScheduler()
                     )
                 )
             )

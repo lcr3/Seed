@@ -10,8 +10,9 @@
 		299305EE26687D0500B751B7 /* SeedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299305ED26687D0500B751B7 /* SeedApp.swift */; };
 		299305F226687D0800B751B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 299305F126687D0800B751B7 /* Assets.xcassets */; };
 		299305F526687D0800B751B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 299305F426687D0800B751B7 /* Preview Assets.xcassets */; };
-		299305FE2669148B00B751B7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 299305FD2669148B00B751B7 /* SeedFeature */; };
 		299306002669152500B751B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 299305FF2669152500B751B7 /* GoogleService-Info.plist */; };
+		2993060226691BB100B751B7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2993060126691BB100B751B7 /* SeedFeature */; };
+		299306042669201200B751B7 /* FirebaseApiClient in Frameworks */ = {isa = PBXBuildFile; productRef = 299306032669201200B751B7 /* FirebaseApiClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				299305FE2669148B00B751B7 /* SeedFeature in Frameworks */,
+				2993060226691BB100B751B7 /* SeedFeature in Frameworks */,
+				299306042669201200B751B7 /* FirebaseApiClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +98,8 @@
 			);
 			name = Debug;
 			packageProductDependencies = (
-				299305FD2669148B00B751B7 /* SeedFeature */,
+				2993060126691BB100B751B7 /* SeedFeature */,
+				299306032669201200B751B7 /* FirebaseApiClient */,
 			);
 			productName = Debug;
 			productReference = 299305EA26687D0500B751B7 /* Debug.app */;
@@ -290,7 +293,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcr.Debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcr.seed.Debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,7 +315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcr.Debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcr.seed.Debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -343,9 +346,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		299305FD2669148B00B751B7 /* SeedFeature */ = {
+		2993060126691BB100B751B7 /* SeedFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SeedFeature;
+		};
+		299306032669201200B751B7 /* FirebaseApiClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseApiClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

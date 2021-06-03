@@ -97,9 +97,11 @@ public struct SeedView: View {
         self.store = store
         ViewStore(store).send(.startObserve)
     }
+
+    private let store: Store<SeedState, SeedAction>
     private var isSearch = false
     @State var isSetting = false
-    let store: Store<SeedState, SeedAction>
+
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             NavigationView {
@@ -134,12 +136,12 @@ public struct SeedView: View {
                             Spacer()
                             NavigationLink(
                                 destination: CreateDiaryView(
-                                    store: Store(
-                                        initialState: CreateDairyState(),
+                                    store: .init(
+                                        initialState: .init(),
                                         reducer: createDairyReducer,
-                                        environment: CreateDairyEnvironment(
-                                            client: FirebaseApiClient.live,
-                                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                        environment: .init(
+                                            client: .live,
+                                            mainQueue: .main.eraseToAnyScheduler()
                                         )
                                     )
                                 )
@@ -151,12 +153,12 @@ public struct SeedView: View {
                             ForEach(viewStore.state.filteredDiaries, id: \.self) { diary in
                                 NavigationLink(
                                     destination: DiaryDetailView(
-                                        store: Store(
-                                            initialState: DiaryDetailState(diary: diary),
+                                        store: .init(
+                                            initialState: .init(diary: diary),
                                             reducer: diaryDetailReducer,
-                                            environment: DiaryDetailEnvironment(
-                                                client: FirebaseApiClient.live,
-                                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                            environment: .init(
+                                                client: .live,
+                                                mainQueue: .main.eraseToAnyScheduler()
                                             )
                                         )
                                     ),
@@ -191,11 +193,11 @@ public struct SeedView: View {
                 }
                 .sheet(isPresented: $isSetting) {
                     SettingView(
-                        store: Store(
-                            initialState: SettingState(),
+                        store: .init(
+                            initialState: .init(),
                             reducer: settingReducer,
-                            environment: SettingEnvironment(
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                            environment: .init(
+                                mainQueue: .main.eraseToAnyScheduler()
                             )
                         )
                     )

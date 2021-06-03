@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SeedPackage",
-//    defaultLocalization: "ja",
+    defaultLocalization: "ja",
     platforms: [
         .iOS(.v14)
     ],
@@ -31,7 +31,7 @@ let package = Package(
         .library(
             name: "Component",
             targets: ["Component"]
-        )
+        ),
     ],
     dependencies: [
         .package(
@@ -48,10 +48,11 @@ let package = Package(
         .target(
             name: "SeedFeature",
             dependencies: [
+                .target(name: "Component"),
+                .target(name: "CreateDairyFeature"),
                 .target(name: "DiaryDetailFeature"),
                 .target(name: "SettingFeature"),
                 .target(name: "FirebaseApiClient"),
-                .target(name: "Component"),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(
                     name: "ComposableArchitecture",
@@ -82,13 +83,6 @@ let package = Package(
                 ),
             ]
         ),
-//        .target(
-//            name: "Models",
-//            dependencies: [
-//                .product(name: "FirebaseFirestore", package: "Firebase"),
-//                .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
-//            ]
-//        ),
         .target(
             name: "FirebaseApiClient",
             dependencies: [
@@ -100,6 +94,6 @@ let package = Package(
                 .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
             ]
         ),
-        .target(name: "Component", dependencies: [])
+        .target(name: "Component", dependencies: []),
     ]
 )
