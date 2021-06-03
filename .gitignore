@@ -91,3 +91,7 @@ GoogleService-Info.plist
 # Gem
 Gemfile.lock
 vendor/
+
+# Package
+/Packages
+.swiftpm
