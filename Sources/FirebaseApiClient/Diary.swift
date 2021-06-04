@@ -16,7 +16,7 @@ public struct Diary: Hashable, Equatable, Codable {
     public let title: String
     public let content: String
     public let userId: Int
-    public let createdAt: Timestamp
+    public let createdAt: Date
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,7 +26,7 @@ public struct Diary: Hashable, Equatable, Codable {
         case createdAt = "created_at"
     }
 
-    public init(id: String? = nil, title: String = "", content: String = "", userId: Int = 0, createdAt: Timestamp = Timestamp()) {
+    public init(id: String? = nil, title: String = "", content: String = "", userId: Int = 0, createdAt: Date) {
         self.id = id
         self.title = title
         self.content = content

@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 import PackageDescription
 
-let package = Package(
+var package = Package(
     name: "SeedPackage",
     defaultLocalization: "ja",
     platforms: [
@@ -97,3 +97,19 @@ let package = Package(
         .target(name: "Component", dependencies: []),
     ]
 )
+
+// MARK: - Test Targets
+package.targets.append(contentsOf: [
+    .testTarget(
+        name: "SeedFeatureTests",
+        dependencies: ["SeedFeature"]
+    ),
+    .testTarget(
+        name: "CreateDairyFeatureTests",
+        dependencies: ["CreateDairyFeature"]
+    ),
+    .testTarget(
+        name: "DiaryDetailFeatureTests",
+        dependencies: ["DiaryDetailFeature"]
+    ),
+])
