@@ -88,13 +88,12 @@ public let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, Dia
 }
 
 public struct DiaryDetailView: View {
-    @Environment(\.presentationMode) @Binding var presentationMode
     public init(store: Store<DiaryDetailState, DiaryDetailAction>) {
         self.store = store
     }
 
+    @Environment(\.presentationMode) @Binding var presentationMode
     public let store: Store<DiaryDetailState, DiaryDetailAction>
-
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             List {

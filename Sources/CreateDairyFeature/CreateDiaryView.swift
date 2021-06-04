@@ -12,9 +12,9 @@ import FirebaseApiClient
 import SwiftUI
 
 public struct CreateDairyState: Equatable {
-    var documentId: String
-    var title: String
-    var content: String
+    public var documentId: String
+    public var title: String
+    public var content: String
 
     public init() {
         documentId = ""
@@ -67,7 +67,7 @@ public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, Cre
             title: state.title,
             content: state.content,
             userId: 1,
-            createdAt: Timestamp())
+            createdAt: Date())
         return environment.client
             .update(newDiary)
             .receive(on: environment.mainQueue)
