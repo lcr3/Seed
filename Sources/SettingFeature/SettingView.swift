@@ -6,6 +6,7 @@
 //  
 //
 
+import Component
 import ComposableArchitecture
 import SwiftUI
 
@@ -40,22 +41,36 @@ public struct SettingView: View {
     }
 
     public var body: some View {
-        WithViewStore(self.store) { viewStore in
-            NavigationView {
+            WithViewStore(self.store) { viewStore in
                 List {
                     Section {
-                        Text("Icon")
+                        HStack {
+                            Text("Theme")
+                            Spacer()
+                            Text("Automatic")
+                                .foregroundColor(.systemGray)
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(.systemGray)
+                        }
+                    }
+                    .onTapGesture {
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Setting")
         }
-    }
 }
 
-//struct SettingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingView.preview
-//    }
-//}
+struct SettingView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingView(
+            store: Store(
+                initialState: SettingState(),
+                reducer: settingReducer,
+                environment: SettingEnvironment(
+                    mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                )
+            )
+        )
+    }
+}
