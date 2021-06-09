@@ -31,7 +31,7 @@ var package = Package(
         .library(
             name: "Component",
             targets: ["Component"]
-        ),
+        )
     ],
     dependencies: [
         .package(
@@ -42,7 +42,7 @@ var package = Package(
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
             .exact("0.18.0")
-        ),
+        )
     ],
     targets: [
         .target(
@@ -57,30 +57,31 @@ var package = Package(
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
-                ),
+                )
             ]
         ),
         .target(
             name: "CreateDairyFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
-                .product(name: "FirebaseFirestore", package: "Firebase"),
+                .product(name: "FirebaseFirestore", package: "Firebase")
             ]
         ),
         .target(
             name: "DiaryDetailFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
-                .product(name: "FirebaseFirestore", package: "Firebase"),
+                .product(name: "FirebaseFirestore", package: "Firebase")
             ]
         ),
         .target(
             name: "SettingFeature",
             dependencies: [
+                .target(name: "Component"),
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
-                ),
+                )
             ]
         ),
         .target(
@@ -91,10 +92,10 @@ var package = Package(
                     package: "swift-composable-architecture"
                 ),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
-                .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
+                .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase")
             ]
         ),
-        .target(name: "Component", dependencies: []),
+        .target(name: "Component", dependencies: [])
     ]
 )
 
@@ -111,5 +112,5 @@ package.targets.append(contentsOf: [
     .testTarget(
         name: "DiaryDetailFeatureTests",
         dependencies: ["DiaryDetailFeature"]
-    ),
+    )
 ])
