@@ -11,11 +11,21 @@ import ComposableArchitecture
 import SwiftUI
 
 public struct SettingState: Equatable {
-    public init() {}
+    public static let defaultFontSizePoint = 0.0
+    public var isUseSystemFontSize: Bool
+    public var fontSizePoint: Double
+    public let fontSizeMaxPoint: Double = 5.0
+
+    public init() {
+        isUseSystemFontSize = true
+        fontSizePoint = 0.0
+    }
 }
 
 public enum SettingAction: Equatable {
     case changeIcon
+    case toggleIsUseSystemFontSize
+    case sliderFontSizeChanged(Double)
 }
 
 public struct SettingEnvironment {
@@ -26,9 +36,18 @@ public struct SettingEnvironment {
     }
 }
 
-public let settingReducer = Reducer<SettingState, SettingAction, SettingEnvironment> { _, action, _ in
+public let settingReducer = Reducer<SettingState, SettingAction, SettingEnvironment> { state, action, _ in
     switch action {
     case .changeIcon:
+        return .none
+    case .toggleIsUseSystemFontSize:
+        state.isUseSystemFontSize.toggle()
+        if state.isUseSystemFontSize {
+            state.fontSizePoint = SettingState.defaultFontSizePoint
+        }
+        return .none
+    case let .sliderFontSizeChanged(value):
+        state.fontSizePoint = value
         return .none
     }
 }
@@ -51,6 +70,36 @@ public struct SettingView: View {
                                 .foregroundColor(.systemGray)
                             Image(systemName: "chevron.down")
                                 .foregroundColor(.systemGray)
+                        }
+                    }
+                    Section {
+                        VStack {
+                            HStack {
+                                Text("Use system font size")
+                                    .lineLimit(1)
+                                    .frame(maxWidth: .infinity,
+                                           alignment: .leading)
+                                Spacer()
+                                Toggle("", isOn:
+                                        viewStore.binding(
+                                            get: \.isUseSystemFontSize,
+                                            send: SettingAction.toggleIsUseSystemFontSize
+                                        )
+                                )
+                                .frame(maxWidth: 70)
+                            }
+                            HStack(spacing: 60) {
+                                Text("Size")
+                                    .disabled(viewStore.isUseSystemFontSize)
+                                Slider(
+                                    value: viewStore.binding(
+                                        get: \.fontSizePoint,
+                                        send: SettingAction.sliderFontSizeChanged
+                                    ),
+                                    in: 0...Double(viewStore.fontSizeMaxPoint),
+                                    step: 1.0
+                                ).disabled(viewStore.isUseSystemFontSize)
+                            }
                         }
                     }
                     .onTapGesture {
