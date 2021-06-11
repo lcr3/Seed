@@ -73,6 +73,25 @@ public struct SettingView: View {
                         }
                     }
                     Section {
+                        IconMenuView(
+                            store: Store(
+                                initialState: .init(selectedIndex: 0,
+                                                    icons: [
+                                                        AppIcon(
+                                                            index: 0,
+                                                            name: "dark",
+                                                            path: "AppIcon_dark")
+                                                    ]
+                                                   ),
+                                reducer: iconMenuReducer,
+                                environment: .init(
+                                    mainQueue: .main.eraseToAnyScheduler(),
+                                    client: .live
+                                )
+                            )
+                        )
+                    }
+                    Section {
                         VStack {
                             HStack {
                                 Text("Use system font size")
@@ -103,6 +122,7 @@ public struct SettingView: View {
                         }
                     }
                     .onTapGesture {
+
                     }
                 }
                 .listStyle(InsetGroupedListStyle())

@@ -12,6 +12,7 @@
 		2993060226691BB100B751B7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2993060126691BB100B751B7 /* SeedFeature */; };
 		299306042669201200B751B7 /* FirebaseApiClient in Frameworks */ = {isa = PBXBuildFile; productRef = 299306032669201200B751B7 /* FirebaseApiClient */; };
 		29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */; };
+		29B453972672EE4800166AC5 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B453962672EE4800166AC5 /* Resources.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		299305F426687D0800B751B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		299305F626687D0800B751B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Debug/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29B453962672EE4800166AC5 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Resources.xcassets; path = Debug/Resources.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				299305ED26687D0500B751B7 /* SeedApp.swift */,
 				299305F626687D0800B751B7 /* Info.plist */,
 				299305F326687D0800B751B7 /* Preview Content */,
+				29B453962672EE4800166AC5 /* Resources.xcassets */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B453972672EE4800166AC5 /* Resources.xcassets in Resources */,
 				2939855F267209D000073B48 /* Assets.xcassets in Resources */,
 				29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */,
 			);
@@ -166,7 +170,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../scripts/lint.sh\n";
+			shellScript = "#../scripts/lint.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
