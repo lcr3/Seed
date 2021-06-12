@@ -10,9 +10,9 @@ import ComposableArchitecture
 import SwiftUI
 
 public class AppIconClient {
-    public var setIcon: (_ name: String) -> Effect<String, AppIconError>
+    public var setIcon: (_ name: String?) -> Effect<String?, AppIconError>
 
-    public init(setIcon: @escaping (String) -> Effect<String, AppIconError>) {
+    public init(setIcon: @escaping (String?) -> Effect<String?, AppIconError>) {
         self.setIcon = setIcon
     }
 }
@@ -30,7 +30,7 @@ public extension AppIconClient {
             .future { callback in
                 UIApplication.shared.setAlternateIconName(name) { error in
                     if let error = error {
-                        callback(.failure(.init(message: error.localizedDescription)))
+                        callback(.failure(.init(message: "file: \(name) \(error.localizedDescription)")))
                     }
                     callback(.success(""))
                 }

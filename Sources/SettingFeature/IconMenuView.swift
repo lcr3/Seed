@@ -13,17 +13,31 @@ import SwiftUI
 struct AppIcon: Equatable {
     let index: Int
     let name: String
-    let path: String
+    let path: String?
 }
 
 struct IconMenuState: Equatable {
     var selectedIndex: Int
     let icons: [AppIcon]
+
+    init(selectedIndex: Int) {
+        self.selectedIndex = selectedIndex
+        self.icons = [
+            AppIcon(
+                index: 0,
+                name: "Light",
+                path: nil),
+            AppIcon(
+                index: 1,
+                name: "Dark",
+                path: "Dark"),
+        ]
+    }
 }
 
 enum IconMenuAction: Equatable {
     case select(Int)
-    case changeIcon(Result<String, AppIconError>)
+    case changeIcon(Result<String?, AppIconError>)
 }
 
 struct IconMenuEnvironment {
@@ -63,7 +77,7 @@ struct IconMenuView: View {
                         viewStore.send(IconMenuAction.select(icon.index))
                     } label: {
                         Text(icon.name)
-                        Image(icon.path)
+//                        Image(uiImage: UIImage(named: icon.path!)!)
                     }
                 }
 
@@ -86,9 +100,7 @@ struct IconMenuView_Previews: PreviewProvider {
     static var previews: some View {
         IconMenuView(
             store: Store(
-                initialState: .init(selectedIndex: 0,
-                                    icons: []
-                                   ),
+                initialState: .init(selectedIndex: 0),
                 reducer: iconMenuReducer,
                 environment: .init(
                     mainQueue: .main.eraseToAnyScheduler(),

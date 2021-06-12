@@ -12,7 +12,10 @@
 		2993060226691BB100B751B7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2993060126691BB100B751B7 /* SeedFeature */; };
 		299306042669201200B751B7 /* FirebaseApiClient in Frameworks */ = {isa = PBXBuildFile; productRef = 299306032669201200B751B7 /* FirebaseApiClient */; };
 		29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */; };
-		29B453972672EE4800166AC5 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B453962672EE4800166AC5 /* Resources.xcassets */; };
+		29B4539C26739CFF00166AC5 /* DarkIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */; };
+		29B4539D26739CFF00166AC5 /* DarkIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */; };
+		29B453A12674494200166AC5 /* LightIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539F2674494100166AC5 /* LightIcon-60@2x.png */; };
+		29B453A22674494200166AC5 /* LightIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453A02674494200166AC5 /* LightIcon-60@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +25,10 @@
 		299305F426687D0800B751B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		299305F626687D0800B751B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Debug/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		29B453962672EE4800166AC5 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Resources.xcassets; path = Debug/Resources.xcassets; sourceTree = "<group>"; };
+		29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@2x.png"; sourceTree = "<group>"; };
+		29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@3x.png"; sourceTree = "<group>"; };
+		29B4539F2674494100166AC5 /* LightIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@2x.png"; sourceTree = "<group>"; };
+		29B453A02674494200166AC5 /* LightIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +64,12 @@
 		299305EC26687D0500B751B7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				29B4539826739CFE00166AC5 /* Icons */,
 				2939855E267209CF00073B48 /* Assets.xcassets */,
 				29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */,
 				299305ED26687D0500B751B7 /* SeedApp.swift */,
 				299305F626687D0800B751B7 /* Info.plist */,
 				299305F326687D0800B751B7 /* Preview Content */,
-				29B453962672EE4800166AC5 /* Resources.xcassets */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -81,6 +87,34 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29B4539826739CFE00166AC5 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				29B453A42674596600166AC5 /* Dark */,
+				29B453A32674595900166AC5 /* Light */,
+			);
+			name = Icons;
+			path = Debug/Icons;
+			sourceTree = "<group>";
+		};
+		29B453A32674595900166AC5 /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				29B4539F2674494100166AC5 /* LightIcon-60@2x.png */,
+				29B453A02674494200166AC5 /* LightIcon-60@3x.png */,
+			);
+			path = Light;
+			sourceTree = "<group>";
+		};
+		29B453A42674596600166AC5 /* Dark */ = {
+			isa = PBXGroup;
+			children = (
+				29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */,
+				29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */,
+			);
+			path = Dark;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +179,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B453972672EE4800166AC5 /* Resources.xcassets in Resources */,
+				29B453A12674494200166AC5 /* LightIcon-60@2x.png in Resources */,
+				29B453A22674494200166AC5 /* LightIcon-60@3x.png in Resources */,
+				29B4539D26739CFF00166AC5 /* DarkIcon-60@3x.png in Resources */,
 				2939855F267209D000073B48 /* Assets.xcassets in Resources */,
+				29B4539C26739CFF00166AC5 /* DarkIcon-60@2x.png in Resources */,
 				29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
