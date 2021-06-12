@@ -12,6 +12,10 @@
 		29B1F0F6266A2F9D0067C5F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29B1F0F5266A2F9D0067C5F7 /* GoogleService-Info.plist */; };
 		29B1F0F8266A2FB00067C5F7 /* SeedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B1F0F7266A2FB00067C5F7 /* SeedApp.swift */; };
 		29B1F0FB266A31730067C5F7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 29B1F0FA266A31730067C5F7 /* SeedFeature */; };
+		29B453BF2674970900166AC5 /* LightIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453BA2674970900166AC5 /* LightIcon-60@3x.png */; };
+		29B453C02674970900166AC5 /* LightIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453BB2674970900166AC5 /* LightIcon-60@2x.png */; };
+		29B453C12674970900166AC5 /* DarkIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453BD2674970900166AC5 /* DarkIcon-60@3x.png */; };
+		29B453C22674970900166AC5 /* DarkIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453BE2674970900166AC5 /* DarkIcon-60@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		29B1F0ED266A2C500067C5F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1F0F5266A2F9D0067C5F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29B1F0F7266A2FB00067C5F7 /* SeedApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedApp.swift; sourceTree = "<group>"; };
+		29B453BA2674970900166AC5 /* LightIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@3x.png"; sourceTree = "<group>"; };
+		29B453BB2674970900166AC5 /* LightIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@2x.png"; sourceTree = "<group>"; };
+		29B453BD2674970900166AC5 /* DarkIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@3x.png"; sourceTree = "<group>"; };
+		29B453BE2674970900166AC5 /* DarkIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 		29B1F0E3266A2C4E0067C5F7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				29B453B82674970900166AC5 /* Icons */,
 				2939856026720A3100073B48 /* Assets.xcassets */,
 				29B1F0F5266A2F9D0067C5F7 /* GoogleService-Info.plist */,
 				29B1F0F7266A2FB00067C5F7 /* SeedApp.swift */,
@@ -77,6 +86,34 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29B453B82674970900166AC5 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				29B453B92674970900166AC5 /* Light */,
+				29B453BC2674970900166AC5 /* Dark */,
+			);
+			name = Icons;
+			path = Production/Icons;
+			sourceTree = "<group>";
+		};
+		29B453B92674970900166AC5 /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				29B453BA2674970900166AC5 /* LightIcon-60@3x.png */,
+				29B453BB2674970900166AC5 /* LightIcon-60@2x.png */,
+			);
+			path = Light;
+			sourceTree = "<group>";
+		};
+		29B453BC2674970900166AC5 /* Dark */ = {
+			isa = PBXGroup;
+			children = (
+				29B453BD2674970900166AC5 /* DarkIcon-60@3x.png */,
+				29B453BE2674970900166AC5 /* DarkIcon-60@2x.png */,
+			);
+			path = Dark;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +178,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B453C22674970900166AC5 /* DarkIcon-60@2x.png in Resources */,
 				29B1F0EC266A2C500067C5F7 /* Preview Assets.xcassets in Resources */,
 				2939856126720A3200073B48 /* Assets.xcassets in Resources */,
+				29B453C12674970900166AC5 /* DarkIcon-60@3x.png in Resources */,
+				29B453BF2674970900166AC5 /* LightIcon-60@3x.png in Resources */,
 				29B1F0F6266A2F9D0067C5F7 /* GoogleService-Info.plist in Resources */,
+				29B453C02674970900166AC5 /* LightIcon-60@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

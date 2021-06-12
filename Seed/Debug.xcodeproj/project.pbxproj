@@ -12,10 +12,10 @@
 		2993060226691BB100B751B7 /* SeedFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2993060126691BB100B751B7 /* SeedFeature */; };
 		299306042669201200B751B7 /* FirebaseApiClient in Frameworks */ = {isa = PBXBuildFile; productRef = 299306032669201200B751B7 /* FirebaseApiClient */; };
 		29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */; };
-		29B4539C26739CFF00166AC5 /* DarkIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */; };
-		29B4539D26739CFF00166AC5 /* DarkIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */; };
 		29B453A12674494200166AC5 /* LightIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B4539F2674494100166AC5 /* LightIcon-60@2x.png */; };
 		29B453A22674494200166AC5 /* LightIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453A02674494200166AC5 /* LightIcon-60@3x.png */; };
+		29B453AE2674936A00166AC5 /* DarkIcon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453AC2674936A00166AC5 /* DarkIcon-60@3x.png */; };
+		29B453AF2674936A00166AC5 /* DarkIcon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B453AD2674936A00166AC5 /* DarkIcon-60@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,10 +25,10 @@
 		299305F426687D0800B751B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		299305F626687D0800B751B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1F0F3266A2F0B0067C5F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Debug/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@2x.png"; sourceTree = "<group>"; };
-		29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@3x.png"; sourceTree = "<group>"; };
 		29B4539F2674494100166AC5 /* LightIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@2x.png"; sourceTree = "<group>"; };
 		29B453A02674494200166AC5 /* LightIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightIcon-60@3x.png"; sourceTree = "<group>"; };
+		29B453AC2674936A00166AC5 /* DarkIcon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@3x.png"; sourceTree = "<group>"; };
+		29B453AD2674936A00166AC5 /* DarkIcon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkIcon-60@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +111,8 @@
 		29B453A42674596600166AC5 /* Dark */ = {
 			isa = PBXGroup;
 			children = (
-				29B4539926739CFE00166AC5 /* DarkIcon-60@2x.png */,
-				29B4539A26739CFE00166AC5 /* DarkIcon-60@3x.png */,
+				29B453AD2674936A00166AC5 /* DarkIcon-60@2x.png */,
+				29B453AC2674936A00166AC5 /* DarkIcon-60@3x.png */,
 			);
 			path = Dark;
 			sourceTree = "<group>";
@@ -179,11 +179,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B453AF2674936A00166AC5 /* DarkIcon-60@2x.png in Resources */,
 				29B453A12674494200166AC5 /* LightIcon-60@2x.png in Resources */,
 				29B453A22674494200166AC5 /* LightIcon-60@3x.png in Resources */,
-				29B4539D26739CFF00166AC5 /* DarkIcon-60@3x.png in Resources */,
+				29B453AE2674936A00166AC5 /* DarkIcon-60@3x.png in Resources */,
 				2939855F267209D000073B48 /* Assets.xcassets in Resources */,
-				29B4539C26739CFF00166AC5 /* DarkIcon-60@2x.png in Resources */,
 				29B1F0F4266A2F0B0067C5F7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

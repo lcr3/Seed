@@ -14,6 +14,7 @@ struct AppIcon: Equatable {
     let index: Int
     let name: String
     let path: String?
+    let thumbnail: String
 }
 
 struct IconMenuState: Equatable {
@@ -26,11 +27,15 @@ struct IconMenuState: Equatable {
             AppIcon(
                 index: 0,
                 name: "Light",
-                path: nil),
+                path: nil,
+                thumbnail: "LightIcon-60"
+            ),
             AppIcon(
                 index: 1,
                 name: "Dark",
-                path: "Dark"),
+                path: "Dark",
+                thumbnail: "DarkIcon-60"
+            ),
         ]
     }
 }
@@ -77,7 +82,7 @@ struct IconMenuView: View {
                         viewStore.send(IconMenuAction.select(icon.index))
                     } label: {
                         Text(icon.name)
-//                        Image(uiImage: UIImage(named: icon.path!)!)
+                        Image(uiImage: UIImage(named: icon.thumbnail)!)
                     }
                 }
 
