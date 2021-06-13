@@ -19,6 +19,7 @@ struct AppIcon: Equatable {
 
 struct IconMenuState: Equatable {
     var selectedIndex: Int
+    var selectedIconName: String?
     let icons: [AppIcon]
 
     init(selectedIndex: Int) {
@@ -51,6 +52,8 @@ struct IconMenuEnvironment {
 }
 
 let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment> { state, action, environment in
+    state.selectedIconName = environment.client.iconName
+
     switch action {
     case let .select(index):
         state.selectedIndex = index
@@ -60,7 +63,8 @@ let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(IconMenuAction.changeIcon)
-    case let .changeIcon(.success(aa)):
+    case let .changeIcon(.success(name)):
+        state.selectedIconName = name
         return .none
     case let .changeIcon(.failure(error)):
         print(error)
@@ -81,8 +85,13 @@ struct IconMenuView: View {
                     Button {
                         viewStore.send(IconMenuAction.select(icon.index))
                     } label: {
-                        Text(icon.name)
-                        Image(uiImage: UIImage(named: icon.thumbnail)!)
+                        HStack {
+                            if viewStore.state.selectedIconName == icon.path {
+                                Image(systemName: "checkmark")
+                            }
+                            Text(icon.name)
+                            Image(uiImage: UIImage(named: icon.thumbnail)!)
+                        }
                     }
                 }
 
