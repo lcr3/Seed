@@ -9,14 +9,39 @@
 import ComposableArchitecture
 import SwiftUI
 
-public class AppIconClient {
-    public var setIcon: (_ name: String?) -> Effect<String?, AppIconError>
-    public var iconName: String?
+public enum IconFlavor: String, CaseIterable, Identifiable {
+    case light = "Light"// default
+    case dark = "Dark"
 
-    public init(setIcon: @escaping (String?) -> Effect<String?, AppIconError>,
-        iconName: String?) {
-            self.setIcon = setIcon
-            self.iconName = UIApplication.shared.alternateIconName
+    public var id: String { self.rawValue }
+
+    static func defaultIcon() -> Self {
+        return .light
+    }
+
+    init(value: String) {
+        if value == IconFlavor.dark.rawValue {
+            self = .dark
+        } else {
+            self = .light
+        }
+    }
+}
+
+public class AppIconClient {
+    public var setIcon: (_ name: IconFlavor) -> Effect<IconFlavor, AppIconError>
+//
+    public var iconName: IconFlavor {
+        get {
+            if let name = UIApplication.shared.alternateIconName {
+                return .init(value: name)
+            }
+            return .defaultIcon()
+        }
+    }
+
+    public init(setIcon: @escaping (IconFlavor) -> Effect<IconFlavor, AppIconError>) {
+        self.setIcon = setIcon
     }
 }
 
@@ -29,14 +54,14 @@ public struct AppIconError: Error, Equatable {
 }
 
 public extension AppIconClient {
-    static let live = AppIconClient(setIcon: { name in
+    static let live = AppIconClient(setIcon: { iconFlavor in
             .future { callback in
-                UIApplication.shared.setAlternateIconName(name) { error in
+                UIApplication.shared.setAlternateIconName(iconFlavor.rawValue) { error in
                     if let error = error {
-                        callback(.failure(.init(message: "file: \(name) \(error.localizedDescription)")))
+                        callback(.failure(.init(message: "file: \(iconFlavor.rawValue) \(error.localizedDescription)")))
                     }
-                    callback(.success(name))
+                    callback(.success(iconFlavor))
                 }
             }
-    }, iconName: UIApplication.shared.alternateIconName)
+    })
 }
