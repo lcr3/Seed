@@ -68,7 +68,7 @@ let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment
 }
 
 struct IconLabel: View {
-    @State var text: IconFlavor
+    @Binding var text: IconFlavor
 
     var body: some View {
         HStack {
@@ -77,15 +77,16 @@ struct IconLabel: View {
             Spacer()
             Text(text.rawValue)
                 .foregroundColor(.systemGray)
+            Image(systemName: "chevron.down")
+                .foregroundColor(.systemGray)
         }
     }
 }
 
 struct IconMenuView: View {
-    @State private var sort: String = "Dark"
-
     public init(store: Store<IconMenuState, IconMenuAction>) {
         self.store = store
+        ViewStore(store).send(.getSelectedIcon)
     }
     public let store: Store<IconMenuState, IconMenuAction>
 
@@ -97,7 +98,10 @@ struct IconMenuView: View {
                     send: IconMenuAction.select
                 ),
                 label: IconLabel(
-                    text: viewStore.state.selectedIconFlavor
+                    text: viewStore.binding(
+                        get: \.selectedIconFlavor,
+                        send: IconMenuAction.select
+                    )
                 )) {
                 ForEach(viewStore.state.icons, id: \.id) { icon in
                     VStack {
@@ -105,9 +109,6 @@ struct IconMenuView: View {
                         Image(uiImage: UIImage(named: icon.thumbnail)!)
                     }.tag(icon.flavor)
                 }
-            }
-            .onAppear {
-                viewStore.send(.getSelectedIcon)
             }
             .pickerStyle(MenuPickerStyle())
         }
