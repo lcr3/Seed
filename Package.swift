@@ -112,5 +112,9 @@ package.targets.append(contentsOf: [
     .testTarget(
         name: "DiaryDetailFeatureTests",
         dependencies: ["DiaryDetailFeature"]
-    )
+    ),
+    .testTarget(
+        name: "SettingFeatureTests",
+        dependencies: ["SettingFeature"]
+    ),
 ])

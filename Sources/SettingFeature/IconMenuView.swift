@@ -10,18 +10,18 @@ import Combine
 import ComposableArchitecture
 import SwiftUI
 
-struct AppIcon: Equatable, Identifiable {
+public struct AppIcon: Equatable, Identifiable {
     let flavor: IconFlavor
     let thumbnail: String
 
     public var id = UUID()
 }
 
-struct IconMenuState: Equatable {
-    var selectedIconFlavor: IconFlavor
-    let icons: [AppIcon]
+public struct IconMenuState: Equatable {
+    public var selectedIconFlavor: IconFlavor
+    public let icons: [AppIcon]
 
-    init(selectedIndex: Int) {
+    public init() {
         selectedIconFlavor = .defaultIcon()
         self.icons = [
             AppIcon(
@@ -36,18 +36,23 @@ struct IconMenuState: Equatable {
     }
 }
 
-enum IconMenuAction: Equatable {
+public enum IconMenuAction: Equatable {
     case getSelectedIcon
     case select(IconFlavor)
     case changeIcon(Result<IconFlavor, AppIconError>)
 }
 
-struct IconMenuEnvironment {
+public struct IconMenuEnvironment {
     var mainQueue: AnySchedulerOf<DispatchQueue>
     var client: AppIconClient
+
+    public init(mainQueue: AnySchedulerOf<DispatchQueue>, client: AppIconClient) {
+        self.mainQueue = mainQueue
+        self.client = client
+    }
 }
 
-let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment> { state, action, environment in
+public let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment> { state, action, environment in
     switch action {
     case .getSelectedIcon:
         state.selectedIconFlavor = environment.client.iconName
@@ -67,10 +72,10 @@ let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment
     }
 }
 
-struct IconLabel: View {
+public struct IconLabel: View {
     @Binding var text: IconFlavor
 
-    var body: some View {
+    public var body: some View {
         HStack {
             Text("App Icon")
                 .foregroundColor(.black)
@@ -83,14 +88,14 @@ struct IconLabel: View {
     }
 }
 
-struct IconMenuView: View {
+public struct IconMenuView: View {
     public init(store: Store<IconMenuState, IconMenuAction>) {
         self.store = store
         ViewStore(store).send(.getSelectedIcon)
     }
     public let store: Store<IconMenuState, IconMenuAction>
 
-    var body: some View {
+    public var body: some View {
         WithViewStore(self.store) { viewStore in
             Picker(
                 selection: viewStore.binding(
@@ -119,7 +124,7 @@ struct IconMenuView_Previews: PreviewProvider {
     static var previews: some View {
         IconMenuView(
             store: Store(
-                initialState: .init(selectedIndex: 0),
+                initialState: .init(),
                 reducer: iconMenuReducer,
                 environment: .init(
                     mainQueue: .main.eraseToAnyScheduler(),
