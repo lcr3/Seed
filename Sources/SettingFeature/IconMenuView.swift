@@ -10,31 +10,26 @@ import Combine
 import ComposableArchitecture
 import SwiftUI
 
-struct AppIcon: Equatable {
-    let index: Int
-    let name: String
-    let path: String?
+struct AppIcon: Equatable, Identifiable {
+    let flavor: IconFlavor
     let thumbnail: String
+
+    public var id = UUID()
 }
 
 struct IconMenuState: Equatable {
-    var selectedIndex: Int
-    var selectedIconName: String?
+    var selectedIconFlavor: IconFlavor
     let icons: [AppIcon]
 
     init(selectedIndex: Int) {
-        self.selectedIndex = selectedIndex
+        selectedIconFlavor = .defaultIcon()
         self.icons = [
             AppIcon(
-                index: 0,
-                name: "Light",
-                path: nil,
+                flavor: .light,
                 thumbnail: "LightIcon-60"
             ),
             AppIcon(
-                index: 1,
-                name: "Dark",
-                path: "Dark",
+                flavor: .dark,
                 thumbnail: "DarkIcon-60"
             ),
         ]
@@ -42,8 +37,9 @@ struct IconMenuState: Equatable {
 }
 
 enum IconMenuAction: Equatable {
-    case select(Int)
-    case changeIcon(Result<String?, AppIconError>)
+    case getSelectedIcon
+    case select(IconFlavor)
+    case changeIcon(Result<IconFlavor, AppIconError>)
 }
 
 struct IconMenuEnvironment {
@@ -52,19 +48,18 @@ struct IconMenuEnvironment {
 }
 
 let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment> { state, action, environment in
-    state.selectedIconName = environment.client.iconName
-
     switch action {
-    case let .select(index):
-        state.selectedIndex = index
-        let selectIcon = state.icons[index]
+    case .getSelectedIcon:
+        state.selectedIconFlavor = environment.client.iconName
+        return .none
+    case let .select(flavor):
         return environment.client
-            .setIcon(selectIcon.path)
+            .setIcon(flavor)
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(IconMenuAction.changeIcon)
-    case let .changeIcon(.success(name)):
-        state.selectedIconName = name
+    case let .changeIcon(.success(flavor)):
+        state.selectedIconFlavor = flavor
         return .none
     case let .changeIcon(.failure(error)):
         print(error)
@@ -72,40 +67,50 @@ let iconMenuReducer = Reducer<IconMenuState, IconMenuAction, IconMenuEnvironment
     }
 }
 
+struct IconLabel: View {
+    @Binding var text: IconFlavor
+
+    var body: some View {
+        HStack {
+            Text("App Icon")
+                .foregroundColor(.black)
+            Spacer()
+            Text(text.rawValue)
+                .foregroundColor(.systemGray)
+            Image(systemName: "chevron.down")
+                .foregroundColor(.systemGray)
+        }
+    }
+}
+
 struct IconMenuView: View {
     public init(store: Store<IconMenuState, IconMenuAction>) {
         self.store = store
+        ViewStore(store).send(.getSelectedIcon)
     }
     public let store: Store<IconMenuState, IconMenuAction>
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            Menu {
-                ForEach(viewStore.state.icons, id: \.name) { icon in
-                    Button {
-                        viewStore.send(IconMenuAction.select(icon.index))
-                    } label: {
-                        HStack {
-                            if viewStore.state.selectedIconName == icon.path {
-                                Image(systemName: "checkmark")
-                            }
-                            Text(icon.name)
-                            Image(uiImage: UIImage(named: icon.thumbnail)!)
-                        }
-                    }
-                }
-
-            } label: {
-                HStack {
-                    Text("App Icon")
-                        .foregroundColor(.black)
-                    Spacer()
-                    Text("Dark")
-                        .foregroundColor(.systemGray)
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.systemGray)
+            Picker(
+                selection: viewStore.binding(
+                    get: \.selectedIconFlavor,
+                    send: IconMenuAction.select
+                ),
+                label: IconLabel(
+                    text: viewStore.binding(
+                        get: \.selectedIconFlavor,
+                        send: IconMenuAction.select
+                    )
+                )) {
+                ForEach(viewStore.state.icons, id: \.id) { icon in
+                    VStack {
+                        Text(icon.flavor.rawValue)
+                        Image(uiImage: UIImage(named: icon.thumbnail)!)
+                    }.tag(icon.flavor)
                 }
             }
+            .pickerStyle(MenuPickerStyle())
         }
     }
 }
