@@ -23,7 +23,6 @@ public struct SettingState: Equatable {
 }
 
 public enum SettingAction: Equatable {
-    case changeIcon
     case toggleIsUseSystemFontSize
     case sliderFontSizeChanged(Double)
 }
@@ -38,8 +37,6 @@ public struct SettingEnvironment {
 
 public let settingReducer = Reducer<SettingState, SettingAction, SettingEnvironment> { state, action, _ in
     switch action {
-    case .changeIcon:
-        return .none
     case .toggleIsUseSystemFontSize:
         state.isUseSystemFontSize.toggle()
         if state.isUseSystemFontSize {
@@ -75,7 +72,7 @@ public struct SettingView: View {
                     Section {
                         IconMenuView(
                             store: Store(
-                                initialState: .init(selectedIndex: 0),
+                                initialState: .init(),
                                 reducer: iconMenuReducer,
                                 environment: .init(
                                     mainQueue: .main.eraseToAnyScheduler(),
