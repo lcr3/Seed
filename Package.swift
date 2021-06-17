@@ -1,11 +1,11 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5.0
 import PackageDescription
 
 var package = Package(
     name: "SeedPackage",
     defaultLocalization: "ja",
     platforms: [
-        .iOS(.v14)
+        .iOS("15.0") // .iOS(.v15)
     ],
     products: [
         .library(
@@ -41,7 +41,7 @@ var package = Package(
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-            .exact("0.18.0")
+            .exact("0.19.0")
         )
     ],
     targets: [
