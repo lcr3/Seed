@@ -97,25 +97,24 @@ public struct IconMenuView: View {
 
     public var body: some View {
         WithViewStore(self.store) { viewStore in
-            Picker(
-                selection: viewStore.binding(
-                    get: \.selectedIconFlavor,
-                    send: IconMenuAction.select
-                ),
-                label: IconLabel(
-                    text: viewStore.binding(
-                        get: \.selectedIconFlavor,
-                        send: IconMenuAction.select
-                    )
-                )) {
+            Picker(selection: viewStore.binding(
+                get: \.selectedIconFlavor,
+                send: IconMenuAction.select
+            )) {
                 ForEach(viewStore.state.icons, id: \.id) { icon in
                     VStack {
                         Text(icon.flavor.rawValue)
                         Image(uiImage: UIImage(named: icon.thumbnail)!)
                     }.tag(icon.flavor)
                 }
-            }
-            .pickerStyle(MenuPickerStyle())
+            } label: {
+                IconLabel(
+                    text: viewStore.binding(
+                        get: \.selectedIconFlavor,
+                        send: IconMenuAction.select
+                    )
+                )
+            }.pickerStyle(MenuPickerStyle())
         }
     }
 }
