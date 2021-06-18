@@ -30,7 +30,6 @@ public enum IconFlavor: String, CaseIterable, Identifiable {
 
 public class AppIconClient {
     public var setIcon: (_ name: IconFlavor) -> Effect<IconFlavor, AppIconError>
-//
     public var iconName: IconFlavor {
         get {
             if let name = UIApplication.shared.alternateIconName {

@@ -5,7 +5,8 @@ var package = Package(
     name: "SeedPackage",
     defaultLocalization: "ja",
     platforms: [
-        .iOS("15.0") // .iOS(.v15)
+//        .iOS(.v15)
+        .iOS("15.0")
     ],
     products: [
         .library(
