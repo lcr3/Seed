@@ -59,21 +59,24 @@ var package = Package(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
                 )
-            ]
+            ],
+            resources: [.copy("SeedFeature.doccarchive")]
         ),
         .target(
             name: "CreateDairyFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
                 .product(name: "FirebaseFirestore", package: "Firebase")
-            ]
+            ],
+            resources: [.copy("CreateDairyFeature.doccarchive")]
         ),
         .target(
             name: "DiaryDetailFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
                 .product(name: "FirebaseFirestore", package: "Firebase")
-            ]
+            ],
+            resources: [.copy("DiaryDetailFeature.doccarchive")]
         ),
         .target(
             name: "SettingFeature",
@@ -83,7 +86,8 @@ var package = Package(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
                 )
-            ]
+            ],
+            resources: [.copy("SettingFeature.doccarchive")]
         ),
         .target(
             name: "FirebaseApiClient",
@@ -94,7 +98,8 @@ var package = Package(
                 ),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase")
-            ]
+            ],
+            resources: [.copy("FirebaseApiClient.doccarchive")]
         ),
         .target(name: "Component", dependencies: [])
     ]
