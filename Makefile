@@ -10,9 +10,7 @@ open:
 run-swiftlint:
 	$(SWIFT_RUN) swiftlint
 
-# SwiftGen
-.PHONY: run-swiftgen
-run-swiftgen:
-	./scripts/swiftgen.sh
-
-.PHONY: run-swiftgen-generate-xcfilelists
+# SwiftFormat
+.PHONY: run-swiftformat
+run-swiftformat:
+	./scripts/format.sh

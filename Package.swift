@@ -32,7 +32,7 @@ var package = Package(
         .library(
             name: "Component",
             targets: ["Component"]
-        )
+        ),
     ],
     dependencies: [
         .package(
@@ -43,7 +43,7 @@ var package = Package(
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
             .exact("0.19.0")
-        )
+        ),
     ],
     targets: [
         .target(
@@ -58,7 +58,7 @@ var package = Package(
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
-                )
+                ),
             ],
             resources: [.copy("SeedFeature.doccarchive")]
         ),
@@ -66,7 +66,7 @@ var package = Package(
             name: "CreateDairyFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
-                .product(name: "FirebaseFirestore", package: "Firebase")
+                .product(name: "FirebaseFirestore", package: "Firebase"),
             ],
             resources: [.copy("CreateDairyFeature.doccarchive")]
         ),
@@ -74,7 +74,7 @@ var package = Package(
             name: "DiaryDetailFeature",
             dependencies: [
                 .target(name: "FirebaseApiClient"),
-                .product(name: "FirebaseFirestore", package: "Firebase")
+                .product(name: "FirebaseFirestore", package: "Firebase"),
             ],
             resources: [.copy("DiaryDetailFeature.doccarchive")]
         ),
@@ -85,7 +85,7 @@ var package = Package(
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
-                )
+                ),
             ],
             resources: [.copy("SettingFeature.doccarchive")]
         ),
@@ -97,15 +97,16 @@ var package = Package(
                     package: "swift-composable-architecture"
                 ),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
-                .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase")
+                .product(name: "FirebaseFirestoreSwift-Beta", package: "Firebase"),
             ],
             resources: [.copy("FirebaseApiClient.doccarchive")]
         ),
-        .target(name: "Component", dependencies: [])
+        .target(name: "Component", dependencies: []),
     ]
 )
 
 // MARK: - Test Targets
+
 package.targets.append(contentsOf: [
     .testTarget(
         name: "SeedFeatureTests",

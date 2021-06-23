@@ -12,7 +12,6 @@ import FirebaseApiClient
 import XCTest
 
 class CreateDairyFeatureTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -136,7 +135,7 @@ class CreateDairyFeatureTests: XCTestCase {
         }
         store.send(CreateDairyAction.update)
 
-        //verify
+        // verify
         store.receive(.updateResponse(.success(response)))
     }
 

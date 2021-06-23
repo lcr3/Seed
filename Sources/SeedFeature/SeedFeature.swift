@@ -1,9 +1,9 @@
 //
 //  SeedFeature.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/18.
-//  
+//
 //
 
 import ComposableArchitecture
@@ -19,6 +19,7 @@ public struct SeedState: Equatable {
             $0.title.contains(searchText) || $0.content.contains(searchText)
         }
     }
+
     public var searchText: String
     public var isSearching: Bool
 

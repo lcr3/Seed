@@ -54,9 +54,9 @@ public struct CreateDiaryView: View {
     }
 }
 
-//struct CreateDiaryView_Previews: PreviewProvider {
+// struct CreateDiaryView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        CreateDiaryView.preview
 //        CreateDiaryView.preview.environment(\.colorScheme, .dark)
 //    }
-//}
+// }

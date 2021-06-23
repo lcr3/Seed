@@ -1,9 +1,9 @@
 //
 //  DiaryDetailView.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/18.
-//  
+//
 //
 
 import ComposableArchitecture
@@ -47,9 +47,9 @@ public struct DiaryDetailView: View {
     }
 }
 
-//struct DiaryDetailView_Previews: PreviewProvider {
+// struct DiaryDetailView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        DiaryDetailView.preview
 //        DiaryDetailView.preview.environment(\.colorScheme, .dark)
 //    }
-//}
+// }

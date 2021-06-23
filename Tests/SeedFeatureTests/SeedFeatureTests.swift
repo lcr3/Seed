@@ -12,7 +12,6 @@ import SeedFeature
 import XCTest
 
 class SeedFeatureTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -128,7 +127,7 @@ class SeedFeatureTests: XCTestCase {
                   title: "response",
                   content: "response",
                   userId: 1,
-                  createdAt: Date(timeIntervalSince1970: (1423053296)))
+                  createdAt: Date(timeIntervalSince1970: 1_423_053_296)),
         ]
 
         store.send(.updateDiaries(.success(diaries))) {
@@ -156,7 +155,7 @@ class SeedFeatureTests: XCTestCase {
                   title: "response",
                   content: "response",
                   userId: 1,
-                  createdAt: Date(timeIntervalSince1970: (1423053296)))
+                  createdAt: Date(timeIntervalSince1970: 1_423_053_296)),
         ]
 
         store.send(.updateDiaries(.success(diaries))) {

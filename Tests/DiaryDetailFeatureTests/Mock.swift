@@ -1,9 +1,9 @@
 //
 //  Mock.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/04.
-//  
+//
 //
 
 import ComposableArchitecture
@@ -18,7 +18,7 @@ extension FirebaseApiClient {
         }
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
-    } update: { diary in
+    } update: { _ in
         .failing("\(Self.self).update is not implemented")
     }
 
@@ -30,7 +30,7 @@ extension FirebaseApiClient {
         }
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
-    } update: { diary in
+    } update: { _ in
         .failing("\(Self.self).update is not implemented")
     }
 
@@ -40,7 +40,7 @@ extension FirebaseApiClient {
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
-    } update: { diary in
+    } update: { _ in
         .future { callback in
             callback(.success("documentId"))
         }
@@ -52,33 +52,33 @@ extension FirebaseApiClient {
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
-    } update: { diary in
+    } update: { _ in
         .future { callback in
             callback(.failure(FirebaseApiClient.ApiFailure(message: "Failure update")))
         }
     }
 
-    static let successDelete = FirebaseApiClient() {
-            .failing("\(Self.self).snapshot is not implemented")
-        } create: { _, _, _ in
-            .failing("\(Self.self).create is not implemented")
-        } delete: { _ in
-            .future { callback in
-                callback(.success("deleteDocumentId"))
-            }
-        } update: { diary in
-            .failing("\(Self.self).update is not implemented")
+    static let successDelete = FirebaseApiClient {
+        .failing("\(Self.self).snapshot is not implemented")
+    } create: { _, _, _ in
+        .failing("\(Self.self).create is not implemented")
+    } delete: { _ in
+        .future { callback in
+            callback(.success("deleteDocumentId"))
         }
+    } update: { _ in
+        .failing("\(Self.self).update is not implemented")
+    }
 
-        static let failureDelete = FirebaseApiClient() {
-            .failing("\(Self.self).snapshot is not implemented")
-        } create: { _, _, _ in
-            .failing("\(Self.self).create is not implemented")
-        } delete: { _ in
-            .future { callback in
-                callback(.failure(ApiFailure(message: "Failure delete")))
-            }
-        } update: { diary in
-            .failing("\(Self.self).update is not implemented")
+    static let failureDelete = FirebaseApiClient {
+        .failing("\(Self.self).snapshot is not implemented")
+    } create: { _, _, _ in
+        .failing("\(Self.self).create is not implemented")
+    } delete: { _ in
+        .future { callback in
+            callback(.failure(ApiFailure(message: "Failure delete")))
         }
+    } update: { _ in
+        .failing("\(Self.self).update is not implemented")
+    }
 }
