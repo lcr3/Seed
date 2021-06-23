@@ -1,9 +1,9 @@
 //
 //  IconMenuView.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/11.
-//  
+//
 //
 
 import Combine
@@ -23,7 +23,7 @@ public struct IconMenuState: Equatable {
 
     public init() {
         selectedIconFlavor = .defaultIcon()
-        self.icons = [
+        icons = [
             AppIcon(
                 flavor: .light,
                 thumbnail: "LightIcon-60"
@@ -93,6 +93,7 @@ public struct IconMenuView: View {
         self.store = store
         ViewStore(store).send(.getSelectedIcon)
     }
+
     public let store: Store<IconMenuState, IconMenuAction>
 
     public var body: some View {

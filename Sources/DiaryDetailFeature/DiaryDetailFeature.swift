@@ -3,7 +3,7 @@
 //  Seed
 //
 //  Created by lcr on 2021/05/11.
-//  
+//
 //
 
 import ComposableArchitecture
@@ -17,8 +17,8 @@ public struct DiaryDetailState: Equatable {
 
     public init(diary: Diary) {
         self.diary = diary
-        self.editedTitle = diary.title
-        self.editedContent = diary.content
+        editedTitle = diary.title
+        editedContent = diary.content
     }
 }
 
@@ -53,7 +53,7 @@ public let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, Dia
         // show action sheet
         return .none
     case .save:
-        if state.editedTitle.isEmpty && state.editedContent.isEmpty, let id = state.diary.id {
+        if state.editedTitle.isEmpty, state.editedContent.isEmpty, let id = state.diary.id {
             return environment.client
                 .delete(id)
                 .receive(on: environment.mainQueue)

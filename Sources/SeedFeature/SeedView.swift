@@ -3,7 +3,7 @@
 //  Seed
 //
 //  Created by lcr on 2021/05/07.
-//  
+//
 //
 
 import Component
@@ -36,9 +36,9 @@ public struct SeedView: View {
                                     .padding(.leading, -12)
                                 TextField("検索",
                                           text: viewStore.binding(
-                                            get: \.searchText,
-                                            send: SeedAction.chageSearchText)
-                                )
+                                              get: \.searchText,
+                                              send: SeedAction.chageSearchText
+                                          ))
                             }
                             .overlay(
                                 HStack {
@@ -111,7 +111,7 @@ public struct SeedView: View {
                             }
                         }
                     }.animation(.easeIn)
-                    .listStyle(InsetGroupedListStyle())
+                        .listStyle(InsetGroupedListStyle())
                 }
                 .sheet(isPresented: $isSetting) {
                     SettingView(
@@ -126,24 +126,22 @@ public struct SeedView: View {
                 }
                 .navigationBarItems(
                     trailing:
-                        Button(action: {
-                            isSetting = true
+                    Button(action: {
+                        isSetting = true
                         }) {
-                            Image(systemName: "gearshape")
-                        }
+                        Image(systemName: "gearshape")
+                    }
                 )
             }
         }
     }
 
-    func didDismiss() {
-
-    }
+    func didDismiss() {}
 }
 
-//struct SeedView_Previews: PreviewProvider {
+// struct SeedView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SeedView.preview
 //        SeedView.preview.environment(\.colorScheme, .dark)
 //    }
-//}
+// }

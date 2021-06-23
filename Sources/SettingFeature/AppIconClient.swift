@@ -1,19 +1,19 @@
 //
 //  AppIconClient.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/11.
-//  
+//
 //
 
 import ComposableArchitecture
 import SwiftUI
 
 public enum IconFlavor: String, CaseIterable, Identifiable {
-    case light = "Light"// default
+    case light = "Light" // default
     case dark = "Dark"
 
-    public var id: String { self.rawValue }
+    public var id: String { rawValue }
 
     static func defaultIcon() -> Self {
         return .light
@@ -31,12 +31,10 @@ public enum IconFlavor: String, CaseIterable, Identifiable {
 public class AppIconClient {
     public var setIcon: (_ name: IconFlavor) -> Effect<IconFlavor, AppIconError>
     public var iconName: IconFlavor {
-        get {
-            if let name = UIApplication.shared.alternateIconName {
-                return .init(value: name)
-            }
-            return .defaultIcon()
+        if let name = UIApplication.shared.alternateIconName {
+            return .init(value: name)
         }
+        return .defaultIcon()
     }
 
     public init(setIcon: @escaping (IconFlavor) -> Effect<IconFlavor, AppIconError>) {
@@ -54,13 +52,13 @@ public struct AppIconError: Error, Equatable {
 
 public extension AppIconClient {
     static let live = AppIconClient(setIcon: { iconFlavor in
-            .future { callback in
-                UIApplication.shared.setAlternateIconName(iconFlavor.rawValue) { error in
-                    if let error = error {
-                        callback(.failure(.init(message: "file: \(iconFlavor.rawValue) \(error.localizedDescription)")))
-                    }
-                    callback(.success(iconFlavor))
+        .future { callback in
+            UIApplication.shared.setAlternateIconName(iconFlavor.rawValue) { error in
+                if let error = error {
+                    callback(.failure(.init(message: "file: \(iconFlavor.rawValue) \(error.localizedDescription)")))
                 }
+                callback(.success(iconFlavor))
             }
+        }
     })
 }

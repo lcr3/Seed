@@ -3,7 +3,7 @@
 //  Seed
 //
 //  Created by lcr on 2021/05/16.
-//  
+//
 //
 
 import SwiftUI

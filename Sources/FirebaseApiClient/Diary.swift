@@ -3,7 +3,7 @@
 //  Seed
 //
 //  Created by lcr on 2021/05/07.
-//  
+//
 //
 
 import Firebase

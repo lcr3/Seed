@@ -1,18 +1,17 @@
 //
 //  SettingFratureTests.swift
-//  
+//
 //
 //  Created by lcr on 2021/06/16.
-//  
+//
 //
 
 import ComposableArchitecture
-//import FirebaseApiClient
+// import FirebaseApiClient
 import SettingFeature
 import XCTest
 
 class SeedFeatureTests: XCTestCase {
-
     func testToggleIsUseSystemFontSize() {
         // setup
         let store = TestStore(
@@ -93,14 +92,14 @@ class SeedFeatureTests: XCTestCase {
 
 private extension AppIconClient {
     static let mock = AppIconClient { iconFlavor in
-            .future { callback in
-                callback(.success(iconFlavor))
-            }
+        .future { callback in
+            callback(.success(iconFlavor))
+        }
     }
 
-    static let failure = AppIconClient { IconFlavor in
-            .future { callback in
-                callback(.failure(.init(message: "change icon error")))
-            }
+    static let failure = AppIconClient { _ in
+        .future { callback in
+            callback(.failure(.init(message: "change icon error")))
+        }
     }
 }

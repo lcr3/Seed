@@ -3,7 +3,7 @@
 //  Seed
 //
 //  Created by lcr on 2021/05/09.
-//  
+//
 //
 
 import ComposableArchitecture
@@ -58,7 +58,7 @@ public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, Cre
             .catchToEffect()
             .map(CreateDairyAction.createResponse)
     case .update:
-        if state.title.isEmpty && state.content.isEmpty {
+        if state.title.isEmpty, state.content.isEmpty {
             // delete
             return .none
         }
@@ -67,7 +67,8 @@ public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, Cre
             title: state.title,
             content: state.content,
             userId: 1,
-            createdAt: Date())
+            createdAt: Date()
+        )
         return environment.client
             .update(newDiary)
             .receive(on: environment.mainQueue)
