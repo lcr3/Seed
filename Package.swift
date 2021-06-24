@@ -5,8 +5,8 @@ var package = Package(
     name: "SeedPackage",
     defaultLocalization: "ja",
     platforms: [
-//        .iOS(.v15)
-        .iOS("15.0")
+        // .iOS(.v15)
+        .iOS("15.0"),
     ],
     products: [
         .library(
@@ -37,8 +37,7 @@ var package = Package(
     dependencies: [
         .package(
             name: "Firebase",
-            url: "https://github.com/firebase/firebase-ios-sdk.git",
-            .exact("7.11.1")
+            url: "https://github.com/firebase/firebase-ios-sdk.git", .exact("8.0.0")
         ),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
