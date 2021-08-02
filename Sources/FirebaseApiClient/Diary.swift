@@ -48,7 +48,7 @@ public struct Diary: Hashable, Equatable, Codable {
                 title: String = "",
                 content: String = "",
                 userId: Int = 0,
-                createdAt: Date,
+                createdAt: Date = Date(),
                 type: Int = 0,
                 when: String = "",
                 where_: String = "",
@@ -74,7 +74,7 @@ public struct Diary: Hashable, Equatable, Codable {
         case memo
         case ep
 
-        func isMemo() -> Bool {
+        public func isMemo() -> Bool {
             return self == .memo
         }
     }
@@ -87,4 +87,18 @@ public struct Diary: Hashable, Equatable, Codable {
             return .memo
         }
     }
+
+    public var imageName: String {
+        switch self.contentType() {
+        case .ep:
+            return DiaryImageName.ep
+        default:
+            return DiaryImageName.memo
+        }
+    }
+}
+
+public struct DiaryImageName {
+    public static let ep = "captions.bubble"
+    public static let memo = "pencil"
 }
