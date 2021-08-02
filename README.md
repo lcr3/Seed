@@ -4,7 +4,7 @@
 
 | 🌞 | 🌙 |
 |:--:|:--:|
-|<img src='./Images/light.png' width=300>|<img src='./images/dark.png' width=300>|
+|<img src='./Images/light.png' width=300>|<img src='./Images/dark.png' width=300>|
 ## 🏗Architecture
 
 [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)
@@ -14,7 +14,7 @@
 * `Debug.xcodeproj`, `Production.xcodeproj`環境を分けている
 * 各ページの機能をモジュール化して[Package.swift](./Package.swift)にて管理
 
-<img src='./images/tree.png' width=200>
+<img src='./Images/tree.png' width=200>
 
 ## 🥞DB
 
