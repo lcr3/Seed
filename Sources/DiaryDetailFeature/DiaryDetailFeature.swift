@@ -14,17 +14,35 @@ public struct DiaryDetailState: Equatable {
     public var diary: Diary
     public var editedTitle: String
     public var editedContent: String
+    public var editedWhen: String
+    public var editedWhere: String
+    public var editedWho: String
+    public var editedWhy: String
+    public var editedHow: String
+    public var editedHappened: String
 
     public init(diary: Diary) {
         self.diary = diary
         editedTitle = diary.title
         editedContent = diary.content
+        editedWhen = diary.when
+        editedWhere = diary.where_
+        editedWho = diary.who
+        editedWhy = diary.why
+        editedHow = diary.how
+        editedHappened = diary.happened
     }
 }
 
 public enum DiaryDetailAction: Equatable {
     case editTitle(String)
     case editContent(String)
+    case editWhen(String)
+    case editWhere(String)
+    case editWho(String)
+    case editWhy(String)
+    case editHow(String)
+    case editHappened(String)
     case sheetButtonTapped
     case save
     case saveResponse(Result<String, FirebaseApiClient.ApiFailure>)
@@ -48,6 +66,24 @@ public let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, Dia
         return .none
     case let .editContent(content):
         state.editedContent = content
+        return .none
+    case let .editWhen(text):
+        state.editedWhen = text
+        return .none
+    case let .editWhere(text):
+        state.editedWhere = text
+        return .none
+    case let .editWho(text):
+        state.editedWho = text
+        return .none
+    case let .editWhy(text):
+        state.editedWhy = text
+        return .none
+    case let .editHow(text):
+        state.editedHow = text
+        return .none
+    case let .editHappened(text):
+        state.editedHappened = text
         return .none
     case .sheetButtonTapped:
         // show action sheet
