@@ -51,6 +51,55 @@ class DiaryDetailFeatureTests: XCTestCase {
         }
     }
 
+    func testEditContent() throws {
+        // setup
+        let diary = Diary(id: "1",
+                          title: "title",
+                          content: "content",
+                          userId: 1,
+                          createdAt: Date(),
+                          when: "when",
+                          where_: "where",
+                          who: "who",
+                          why: "why",
+                          how: "how",
+                          happened: "happend"
+        )
+
+        let store = TestStore(
+            initialState: DiaryDetailState(diary: diary),
+            reducer: diaryDetailReducer,
+            environment: DiaryDetailEnvironment(
+                client: .mock,
+                mainQueue: .immediate.eraseToAnyScheduler()
+            )
+        )
+        let editValue = "edit"
+
+        //execute
+        store.send(.editContent(editValue)) {
+            $0.editedContent = editValue
+        }
+        store.send(.editWhen(editValue)) {
+            $0.editedWhen = editValue
+        }
+        store.send(.editWhere(editValue)) {
+            $0.editedWhere = editValue
+        }
+        store.send(.editWho(editValue)) {
+            $0.editedWho = editValue
+        }
+        store.send(.editWhy(editValue)) {
+            $0.editedWhy = editValue
+        }
+        store.send(.editHow(editValue)) {
+            $0.editedHow = editValue
+        }
+        store.send(.editHappened(editValue)) {
+            $0.editedHappened = editValue
+        }
+    }
+
     func testSheetButtonTapped() throws {
         // setup
         let diary = Diary(id: "1",
