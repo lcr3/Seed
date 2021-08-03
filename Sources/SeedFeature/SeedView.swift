@@ -85,19 +85,23 @@ public struct SeedView: View {
                                         )
                                     ),
                                     label: {
-                                        VStack(alignment: .leading, spacing: 8) {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack(alignment: .center, spacing: 4) {
+                                            Image(systemName: diary.imageName)
+                                                .font(.caption)
                                             Text(diary.title)
                                                 .bold()
-                                            Text(diary.content)
-                                                .font(.caption)
-                                                .lineLimit(1)
-                                                .foregroundColor(.gray)
                                         }
-                                        .padding(.bottom, 8)
-                                        .padding(.top, 8)
+                                        Text(diary.content)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                            .foregroundColor(.gray)
                                     }
+                                    .padding(.bottom, 8)
+                                    .padding(.top, 8)
+                                }
                                 )
-                                .contextMenu(
+                                    .contextMenu(
                                     menuItems: {
                                         HStack {
                                             Text(diary.title)
@@ -139,9 +143,27 @@ public struct SeedView: View {
     func didDismiss() {}
 }
 
-// struct SeedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SeedView.preview
-//        SeedView.preview.environment(\.colorScheme, .dark)
-//    }
-// }
+ struct SeedView_Previews: PreviewProvider {
+    static var previews: some View {
+        SeedView(
+            store: .init(
+                initialState: SeedState(),
+                reducer: seedReducer,
+                environment: .init(
+                    client: .mock,
+                    mainQueue: .main.eraseToAnyScheduler()
+                )
+            )
+        )
+        SeedView(
+            store: .init(
+                initialState: SeedState(),
+                reducer: seedReducer,
+                environment: .init(
+                    client: .mock,
+                    mainQueue: .main.eraseToAnyScheduler()
+                )
+            )
+        ).environment(\.colorScheme, .dark)
+    }
+ }
