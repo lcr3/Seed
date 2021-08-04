@@ -36,21 +36,21 @@ public struct SeedView: View {
                                     .padding(.leading, -12)
                                 TextField("検索",
                                           text: viewStore.binding(
-                                              get: \.searchText,
-                                              send: SeedAction.chageSearchText
+                                            get: \.searchText,
+                                            send: SeedAction.chageSearchText
                                           ))
                             }
                             .overlay(
                                 HStack {
-                                    Spacer()
-                                    if viewStore.state.isSearching {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.systemGray)
-                                            .onTapGesture {
-                                                ViewStore(store).send(SeedAction.resetSearchText)
-                                            }
-                                    }
+                                Spacer()
+                                if viewStore.state.isSearching {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.systemGray)
+                                        .onTapGesture {
+                                            ViewStore(store).send(SeedAction.resetSearchText)
+                                        }
                                 }
+                            }
                             )
                         }
                         Section(header: HStack {
@@ -85,30 +85,19 @@ public struct SeedView: View {
                                         )
                                     ),
                                     label: {
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        HStack(alignment: .center, spacing: 4) {
-                                            Image(systemName: diary.imageName)
-                                                .font(.caption)
-                                            Text(diary.title)
-                                                .bold()
-                                        }
-                                        Text(diary.content)
-                                            .font(.caption)
-                                            .lineLimit(1)
-                                            .foregroundColor(.gray)
-                                    }
-                                    .padding(.bottom, 8)
-                                    .padding(.top, 8)
+                                    SeedCell(diary: diary)
+                                        .padding(.bottom, 8)
+                                        .padding(.top, 8)
                                 }
                                 )
                                     .contextMenu(
-                                    menuItems: {
+                                        menuItems: {
                                         HStack {
                                             Text(diary.title)
                                             Text(diary.content)
                                         }
                                     }
-                                )
+                                    )
                             }.onDelete { offsets in
                                 guard let index = offsets.first else { return }
                                 ViewStore(store).send(.deleteButtonTapped(index))
@@ -130,11 +119,11 @@ public struct SeedView: View {
                 }
                 .navigationBarItems(
                     trailing:
-                    Button(action: {
-                        isSetting = true
-                        }) {
-                        Image(systemName: "gearshape")
-                    }
+                        Button(action: {
+                    isSetting = true
+                }) {
+                    Image(systemName: "gearshape")
+                }
                 )
             }
         }
@@ -143,7 +132,7 @@ public struct SeedView: View {
     func didDismiss() {}
 }
 
- struct SeedView_Previews: PreviewProvider {
+struct SeedView_Previews: PreviewProvider {
     static var previews: some View {
         SeedView(
             store: .init(
@@ -166,4 +155,4 @@ public struct SeedView: View {
             )
         ).environment(\.colorScheme, .dark)
     }
- }
+}
