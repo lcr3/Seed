@@ -18,7 +18,7 @@ public struct SeedCell: View {
     }
 
     public var body: some View {
-        if diary.contentType().isMemo() {
+        if diary.contentType().isMemo {
             MemoCell(diary: diary)
         } else {
             EpisodeCell(diary: diary)

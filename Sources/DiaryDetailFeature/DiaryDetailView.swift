@@ -31,7 +31,7 @@ public struct DiaryDetailView: View {
                     )
                     .multilineTextAlignment(.trailing)
                 }
-                if viewStore.state.diary.contentType().isMemo() {
+                if viewStore.state.diary.contentType().isMemo {
                     Section(header: Text("Contents")) {
                         TextEditor(
                             text: viewStore.binding(
