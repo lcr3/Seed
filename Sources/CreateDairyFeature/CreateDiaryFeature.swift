@@ -15,15 +15,20 @@ public struct CreateDairyState: Equatable {
     public var documentId: String
     public var title: String
     public var content: String
+    public var selectedSegment: Diary.ContentType
+    public var segments: [Diary.ContentType]
 
     public init() {
         documentId = ""
         title = ""
         content = ""
+        segments = [.memo, .ep]
+        selectedSegment = .memo
     }
 }
 
 public enum CreateDairyAction: Equatable {
+    case tapSegment(Diary.ContentType)
     case changeTitle(String)
     case changeContent(String)
     case create
@@ -44,6 +49,9 @@ public struct CreateDairyEnvironment {
 
 public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, CreateDairyEnvironment> { state, action, environment in
     switch action {
+    case let .tapSegment(type):
+        state.selectedSegment = type
+        return .none
     case let .changeTitle(title):
         state.title = title
         return .none
