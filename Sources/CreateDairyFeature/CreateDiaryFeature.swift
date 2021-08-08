@@ -59,9 +59,13 @@ public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, Cre
         state.content = content
         return .none
     case .create:
-        print("つくりやす")
+        let diary = Diary(
+            title: state.title,
+            content: state.content,
+            userId: 1
+        )
         return environment.client
-            .create(state.title, state.content, 1)
+            .create(diary)
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(CreateDairyAction.createResponse)

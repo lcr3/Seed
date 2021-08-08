@@ -21,7 +21,7 @@ extension FirebaseApiClient {
             ])
             return AnyCancellable {}
         }
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
@@ -34,7 +34,7 @@ extension FirebaseApiClient {
             subscriber.send(completion: .failure(ApiFailure(message: "mock error")))
             return AnyCancellable {}
         }
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
@@ -44,7 +44,7 @@ extension FirebaseApiClient {
 
     static let successDelete = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .future { callback in
@@ -56,7 +56,7 @@ extension FirebaseApiClient {
 
     static let failureDelete = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .future { callback in
