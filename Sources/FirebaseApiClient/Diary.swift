@@ -74,7 +74,15 @@ public struct Diary: Hashable, Equatable, Codable {
         case memo
         case ep
 
-        public func isMemo() -> Bool {
+        public var title: String {
+            if self == .memo {
+                return "Memo"
+            } else {
+                return "Episord"
+            }
+        }
+
+        public var isMemo: Bool {
             return self == .memo
         }
     }

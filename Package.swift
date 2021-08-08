@@ -113,7 +113,7 @@ package.targets.append(contentsOf: [
     ),
     .testTarget(
         name: "CreateDairyFeatureTests",
-        dependencies: ["CreateDairyFeature"]
+        dependencies: ["CreateDairyFeature", "Component"]
     ),
     .testTarget(
         name: "DiaryDetailFeatureTests",

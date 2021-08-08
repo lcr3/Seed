@@ -26,7 +26,7 @@ extension CreateDiaryView {
 extension FirebaseApiClient {
     static let successCreate = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .future { callback in
             callback(.success("documentId"))
         }
@@ -38,7 +38,7 @@ extension FirebaseApiClient {
 
     static let failureCreate = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .future { callback in
             callback(.failure(FirebaseApiClient.ApiFailure(message: "Failure create")))
         }
@@ -50,7 +50,7 @@ extension FirebaseApiClient {
 
     static let successUpdate = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")
@@ -62,7 +62,7 @@ extension FirebaseApiClient {
 
     static let failureUpdate = FirebaseApiClient {
         .failing("\(Self.self).snapshot is not implemented")
-    } create: { _, _, _ in
+    } create: { _ in
         .failing("\(Self.self).create is not implemented")
     } delete: { _ in
         .failing("\(Self.self).delete is not implemented")

@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 public struct FirebaseApiClient {
     private static let diaries = "diaries"
     public var updateSnapshot: () -> Effect<[Diary], ApiFailure>
-    public var create: (_ title: String, _ content: String, _ userId: Int) -> Effect<String, ApiFailure>
+    public var create: (_ diary: Diary) -> Effect<String, ApiFailure>
     public var delete: (_ documentId: String) -> Effect<String, ApiFailure>
     public var update: (_ diary: Diary) -> Effect<String, ApiFailure>
 
@@ -27,7 +27,7 @@ public struct FirebaseApiClient {
     }
 
     public init(updateSnapshot: @escaping () -> Effect<[Diary], ApiFailure>,
-                create: @escaping (String, String, Int) -> Effect<String, ApiFailure>,
+                create: @escaping (Diary) -> Effect<String, ApiFailure>,
                 delete: @escaping (String) -> Effect<String, ApiFailure>,
                 update: @escaping (Diary) -> Effect<String, ApiFailure>) {
         self.updateSnapshot = updateSnapshot
@@ -78,14 +78,21 @@ public extension FirebaseApiClient {
                 print("cancel")
             }
         }
-    } create: { title, content, userId in
+    } create: { diary in
         .future { callback in
             var ref: DocumentReference?
             ref = Firestore.firestore().collection(Self.diaries).addDocument(data: [
-                "title": title,
-                "content": content,
-                "user_id": userId,
+                "title": diary.title,
+                "type": diary.type,
+                "content": diary.content,
+                "user_id": diary.userId,
                 "created_at": Timestamp(date: Date()),
+                "when": diary.when,
+                "where": diary.where_,
+                "who": diary.who,
+                "why": diary.why,
+                "how": diary.how,
+                "happened": diary.happened,
             ]) { error in
                 if let error = error {
                     callback(.failure(.init(message: "Create diary error")))
@@ -147,7 +154,7 @@ public extension FirebaseApiClient {
             ])
             return AnyCancellable {}
         }
-    } create: { _, _, _ in
+    } create: { _ in
         .future { callback in
             callback(.success(""))
         }
