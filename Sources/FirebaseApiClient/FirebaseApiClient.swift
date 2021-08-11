@@ -122,9 +122,16 @@ public extension FirebaseApiClient {
             }
             Firestore.firestore().collection(Self.diaries).document(documentId).updateData([
                 "title": diary.title,
+                "type": diary.type,
                 "content": diary.content,
                 "user_id": diary.userId,
-                "created_at": diary.createdAt,
+                "created_at": Timestamp(date: Date()),
+                "when": diary.when,
+                "where": diary.where_,
+                "who": diary.who,
+                "why": diary.why,
+                "how": diary.how,
+                "happened": diary.happened,
             ]) { error in
                 if let error = error {
                     callback(.failure(.init(message: "Edit diary error")))
