@@ -15,6 +15,13 @@ public struct CreateDairyState: Equatable {
     public var documentId: String
     public var title: String
     public var content: String
+    public var when: String
+    public var where_: String
+    public var who: String
+    public var why: String
+    public var how: String
+    public var happened: String
+
     public var selectedSegment: Diary.ContentType
     public var segments: [Diary.ContentType]
 
@@ -24,6 +31,12 @@ public struct CreateDairyState: Equatable {
         content = ""
         segments = [.memo, .ep]
         selectedSegment = .memo
+        when = ""
+        where_ = ""
+        who = ""
+        why = ""
+        how = ""
+        happened = ""
     }
 }
 
@@ -31,6 +44,12 @@ public enum CreateDairyAction: Equatable {
     case tapSegment(Diary.ContentType)
     case changeTitle(String)
     case changeContent(String)
+    case changeWhen(String)
+    case changeWhere(String)
+    case changeWho(String)
+    case changeWhy(String)
+    case changeHow(String)
+    case changeHappened(String)
     case create
     case update
     case createResponse(Result<String, FirebaseApiClient.ApiFailure>)
@@ -58,29 +77,83 @@ public let createDairyReducer = Reducer<CreateDairyState, CreateDairyAction, Cre
     case let .changeContent(content):
         state.content = content
         return .none
+    case let .changeWhen(text):
+        state.when = text
+        return .none
+    case let .changeWhere(text):
+        state.where_ = text
+        return .none
+    case let .changeWho(text):
+        state.who = text
+        return .none
+    case let .changeWhy(text):
+        state.why = text
+        return .none
+    case let .changeHow(text):
+        state.how = text
+        return .none
+    case let .changeHappened(text):
+        state.happened = text
+        return .none
     case .create:
-        let diary = Diary(
-            title: state.title,
-            content: state.content,
-            userId: 1
-        )
+        let diary:Diary
+        if state.selectedSegment.isMemo {
+            diary = Diary(
+                title: state.title,
+                content: state.content,
+                userId: 1,
+                type: Diary.ContentType.memo.rawValue
+            )
+        } else {
+            diary = Diary(
+                title: state.title,
+                userId: 1,
+                type: Diary.ContentType.ep.rawValue,
+                when: state.when,
+                where_: state.where_,
+                who: state.who,
+                why: state.why,
+                how: state.how,
+                happened: state.happened
+            )
+        }
         return environment.client
             .create(diary)
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(CreateDairyAction.createResponse)
     case .update:
-        if state.title.isEmpty, state.content.isEmpty {
-            // delete
+        if state.selectedSegment.isMemo, state.title.isEmpty, state.content.isEmpty {
+            // TODO: alert
             return .none
         }
-        let newDiary = Diary(
-            id: state.documentId,
-            title: state.title,
-            content: state.content,
-            userId: 1,
-            createdAt: Date()
-        )
+        if !state.selectedSegment.isMemo, state.title.isEmpty, state.when.isEmpty, state.where_.isEmpty, state.who.isEmpty, state.why.isEmpty, state.how.isEmpty, state.happened.isEmpty {
+            // TODO: alert
+            return .none
+        }
+        let newDiary:Diary
+        if state.selectedSegment.isMemo {
+            newDiary = Diary(
+                id: state.documentId,
+                title: state.title,
+                content: state.content,
+                userId: 1,
+                type: Diary.ContentType.memo.rawValue
+            )
+        } else {
+            newDiary = Diary(
+                id: state.documentId,
+                title: state.title,
+                userId: 1,
+                type: Diary.ContentType.ep.rawValue,
+                when: state.when,
+                where_: state.where_,
+                who: state.who,
+                why: state.why,
+                how: state.how,
+                happened: state.happened
+            )
+        }
         return environment.client
             .update(newDiary)
             .receive(on: environment.mainQueue)
