@@ -106,7 +106,6 @@ public struct CreateDiaryView: View {
                 .listStyle(InsetGroupedListStyle())
                 .navigationBarItems(
                     trailing: Button("保存") {
-                    ViewStore(store).send(.create)
                     presentationMode.dismiss()
                 }
                 ).onDisappear {
