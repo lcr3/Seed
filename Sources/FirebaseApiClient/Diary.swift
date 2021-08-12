@@ -29,6 +29,10 @@ public struct Diary: Hashable, Equatable, Codable {
     public let userId: Int
     public let createdAt: Date
 
+    public var isMemo: Bool {
+        type == Diary.ContentType.memo.rawValue
+    }
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
