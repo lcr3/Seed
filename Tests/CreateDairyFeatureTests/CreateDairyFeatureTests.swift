@@ -56,6 +56,24 @@ class CreateDairyFeatureTests: XCTestCase {
             // verify
             $0.content = changeContent
         }
+        store.send(.changeWhen(changeContent)) {
+            $0.when = changeContent
+        }
+        store.send(.changeWhere(changeContent)) {
+            $0.where_ = changeContent
+        }
+        store.send(.changeWho(changeContent)) {
+            $0.who = changeContent
+        }
+        store.send(.changeWhy(changeContent)) {
+            $0.why = changeContent
+        }
+        store.send(.changeHow(changeContent)) {
+            $0.how = changeContent
+        }
+        store.send(.changeHappened(changeContent)) {
+            $0.happened = changeContent
+        }
     }
 
     func testSuccessCreate() throws {
