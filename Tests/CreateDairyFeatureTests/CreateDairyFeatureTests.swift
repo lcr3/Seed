@@ -87,13 +87,116 @@ class CreateDairyFeatureTests: XCTestCase {
             )
         )
         let response = "documentId"
+        let editTitle = "Title"
 
         // execute
+        store.send(.changeTitle(editTitle)) {
+            // input title
+            $0.title = editTitle
+        }
         store.send(.create)
 
         // verify
         store.receive(.createResponse(.success(response))) {
             $0.documentId = response
+        }
+    }
+
+    func testCreateMemoValidation() throws {
+        // setup
+        let store = TestStore(
+            initialState: CreateDairyState(),
+            reducer: createDairyReducer,
+            environment: CreateDairyEnvironment(
+                client: .successCreate,
+                mainQueue: .immediate.eraseToAnyScheduler()
+            )
+        )
+        let documentId = "documentId"
+        let editTitle = "Title"
+
+        // select segment memo
+        store.send(.tapSegment(.memo)) {
+            $0.selectedSegment = .memo
+        }
+
+        // execute
+        store.send(.create) {
+            // failed create validation
+            $0.documentId = ""
+        }
+
+        store.send(.changeTitle(editTitle)) {
+            // input title
+            $0.title = editTitle
+        }
+
+        store.send(.create)
+
+        // execute
+        store.receive(.createResponse(.success(documentId))) {
+            // success create
+            $0.documentId = documentId
+        }
+    }
+
+    func testCreateEpValidation() throws {
+        // setup
+        let store = TestStore(
+            initialState: CreateDairyState(),
+            reducer: createDairyReducer,
+            environment: CreateDairyEnvironment(
+                client: .successCreate,
+                mainQueue: .immediate.eraseToAnyScheduler()
+            )
+        )
+        let documentId = "documentId"
+        let editWhen = "When"
+
+        // select segment ep
+        store.send(.tapSegment(.ep)) {
+            $0.selectedSegment = .ep
+        }
+
+        // execute
+        store.send(.create) {
+            // failed create validation
+            $0.documentId = ""
+        }
+
+        store.send(.changeWhen(editWhen)) {
+            // input when
+            $0.when = editWhen
+        }
+
+        store.send(.create)
+
+        // execute
+        store.receive(.createResponse(.success(documentId))) {
+            // success create
+            $0.documentId = documentId
+        }
+    }
+
+    func testSelectSegments() throws {
+        // setup
+        let store = TestStore(
+            initialState: CreateDairyState(),
+            reducer: createDairyReducer,
+            environment: CreateDairyEnvironment(
+                client: .successCreate,
+                mainQueue: .immediate.eraseToAnyScheduler()
+            )
+        )
+
+        // execute verify
+        store.send(.tapSegment(.ep)) {
+            $0.selectedSegment = .ep
+        }
+
+        // execute verify
+        store.send(.tapSegment(.memo)) {
+            $0.selectedSegment = .memo
         }
     }
 
@@ -107,79 +210,66 @@ class CreateDairyFeatureTests: XCTestCase {
                 mainQueue: .immediate.eraseToAnyScheduler()
             )
         )
+        let editTitle = "Title"
 
         // execute
+        store.send(.changeTitle(editTitle)) {
+            // input title
+            $0.title = editTitle
+        }
         store.send(CreateDairyAction.create)
 
         // verify
         store.receive(.createResponse(.failure(.init(message: "Failure create"))))
     }
 
-    func testNoDataUpdate() throws {
+    func testMemoIsEmpty() throws {
         // setup
         let store = TestStore(
             initialState: CreateDairyState(),
             reducer: createDairyReducer,
             environment: CreateDairyEnvironment(
-                client: .successUpdate,
+                client: .failureCreate,
                 mainQueue: .immediate.eraseToAnyScheduler()
             )
         )
 
-        // verify
-        store.send(CreateDairyAction.update)
+        store.send(.changeTitle("")) {
+            var isEmpty = $0.isEmpty
+            isEmpty = true
+        }
+
+        store.send(.changeTitle("Title")) {
+            $0.title = "Title"
+            var isEmpty = $0.isEmpty
+            isEmpty = false
+        }
     }
 
-    func testSuccessUpdate() throws {
+    func testEpIsEmpty() throws {
         // setup
         let store = TestStore(
             initialState: CreateDairyState(),
             reducer: createDairyReducer,
             environment: CreateDairyEnvironment(
-                client: .successUpdate,
+                client: .failureCreate,
                 mainQueue: .immediate.eraseToAnyScheduler()
             )
         )
-        let changeTitle = "title"
-        let changeContent = "content"
-        let response = "documentId"
 
-        // execute
-        store.send(CreateDairyAction.changeTitle(changeTitle)) {
-            $0.title = changeTitle
+        store.send(.tapSegment(.ep)) {
+            $0.selectedSegment = .ep
         }
-        store.send(CreateDairyAction.changeContent(changeContent)) {
-            $0.content = changeContent
+
+        store.send(.changeWhen("")) {
+            var isEmpty = $0.isEmpty
+            isEmpty = true
         }
-        store.send(CreateDairyAction.update)
 
-        // verify
-        store.receive(.updateResponse(.success(response)))
-    }
-
-    func testFailureUpdate() throws {
-        // setup
-        let store = TestStore(
-            initialState: CreateDairyState(),
-            reducer: createDairyReducer,
-            environment: CreateDairyEnvironment(
-                client: .failureUpdate,
-                mainQueue: .immediate.eraseToAnyScheduler()
-            )
-        )
-        let changeTitle = "title"
-        let changeContent = "content"
-
-        // execute
-        store.send(CreateDairyAction.changeTitle(changeTitle)) {
-            $0.title = changeTitle
+        store.send(.changeWhen("When")) {
+            $0.when = "When"
+            var isEmpty = $0.isEmpty
+            isEmpty = false
         }
-        store.send(CreateDairyAction.changeContent(changeContent)) {
-            $0.content = changeContent
-        }
-        store.send(CreateDairyAction.update)
-
-        // verify
-        store.receive(.updateResponse(.failure(.init(message: "Failure update"))))
     }
 }
