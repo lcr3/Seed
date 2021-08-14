@@ -89,6 +89,10 @@ public struct Diary: Hashable, Equatable, Codable {
         public var isMemo: Bool {
             return self == .memo
         }
+
+        public var isEp: Bool {
+            return self != .memo
+        }
     }
 
     public func contentType() -> ContentType {

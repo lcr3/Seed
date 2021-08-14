@@ -111,8 +111,6 @@ public struct CreateDiaryView: View {
                 ).onDisappear {
                     if viewStore.state.documentId.isEmpty {
                         viewStore.send(.create)
-                    } else {
-                        viewStore.send(.update)
                     }
                 }
             }.background(Color.listGray)
