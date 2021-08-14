@@ -44,6 +44,18 @@ class DiaryTests: XCTestCase {
         XCTAssertEqual(unknownDiary.contentType().isMemo, true)
     }
 
+    func testIsEp() throws {
+        // setup
+        let memoDiary = Diary(type: 0)
+        let epDiary = Diary(type: 1)
+        let unknownDiary = Diary(type: 2)
+
+        // // verify
+        XCTAssertEqual(memoDiary.contentType().isEp, false)
+        XCTAssertEqual(epDiary.contentType().isEp, true)
+        XCTAssertEqual(unknownDiary.contentType().isEp, false)
+    }
+
     func testImageName() throws {
         // setup
         let memoDiary = Diary(type: 0)

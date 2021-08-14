@@ -89,20 +89,50 @@ public let diaryDetailReducer = Reducer<DiaryDetailState, DiaryDetailAction, Dia
         // show action sheet
         return .none
     case .save:
-        if state.editedTitle.isEmpty, state.editedContent.isEmpty, let id = state.diary.id {
+        if state.diary.isMemo, state.editedTitle.isEmpty, state.editedContent.isEmpty, let id = state.diary.id {
+            return environment.client
+                .delete(id)
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(DiaryDetailAction.deleteResponse)
+        } else if !state.diary.isMemo, state.editedTitle.isEmpty, state.editedWhen.isEmpty, state.editedWhere.isEmpty, state.editedWho.isEmpty, state.editedWhy.isEmpty, state.editedHow.isEmpty, state.editedHappened.isEmpty, let id = state.diary.id {
             return environment.client
                 .delete(id)
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(DiaryDetailAction.deleteResponse)
         }
-        let updateDiary = Diary(
-            id: state.diary.id,
-            title: state.editedTitle,
-            content: state.editedContent,
-            userId: state.diary.userId,
-            createdAt: state.diary.createdAt
-        )
+        let updateDiary: Diary
+        if state.diary.isMemo {
+            updateDiary = Diary(
+                id: state.diary.id,
+                title: state.editedTitle,
+                content: state.editedContent,
+                createdAt: state.diary.createdAt,
+                type: Diary.ContentType.memo.rawValue,
+                when: "",
+                where_: "",
+                who: "",
+                why: "",
+                how: "",
+                happened: ""
+            )
+        } else {
+            updateDiary = Diary(
+                id: state.diary.id,
+                title: state.editedTitle,
+                content: "",
+                userId: state.diary.userId,
+                createdAt: state.diary.createdAt,
+                type: Diary.ContentType.ep.rawValue,
+                when: state.editedWhen,
+                where_: state.editedWhere,
+                who: state.editedWho,
+                why: state.editedWhy,
+                how: state.editedHow,
+                happened: state.editedHappened
+            )
+        }
         return environment.client
             .update(updateDiary)
             .receive(on: environment.mainQueue)

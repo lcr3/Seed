@@ -43,24 +43,74 @@ public struct CreateDiaryView: View {
                         )
                             .multilineTextAlignment(.trailing)
                     }
-                    Section(header: Text("Contents")) {
-                        TextEditor(
-                            text: viewStore.binding(
-                                get: \.content,
-                                send: CreateDairyAction.changeContent
+                    if viewStore.state.selectedSegment.isMemo {
+                        Section(header: Text("Contents")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.content,
+                                    send: CreateDairyAction.changeContent
+                                )
                             )
-                        )
+                        }
+                    } else {
+                        Section(header: Text("When")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.when,
+                                    send: CreateDairyAction.changeWhen
+                                )
+                            )
+                        }
+                        Section(header: Text("Where")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.where_,
+                                    send: CreateDairyAction.changeWhere
+                                )
+                            )
+                        }
+                        Section(header: Text("Who")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.who,
+                                    send: CreateDairyAction.changeWho
+                                )
+                            )
+                        }
+                        Section(header: Text("Why")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.why,
+                                    send: CreateDairyAction.changeWhy
+                                )
+                            )
+                        }
+                        Section(header: Text("How")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.how,
+                                    send: CreateDairyAction.changeHow
+                                )
+                            )
+                        }
+                        Section(header: Text("Happened")) {
+                            TextEditor(
+                                text: viewStore.binding(
+                                    get: \.happened,
+                                    send: CreateDairyAction.changeHappened
+                                )
+                            )
+                        }
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
                 .navigationBarItems(
                     trailing: Button("保存") {
-                    ViewStore(store).send(.create)
                     presentationMode.dismiss()
                 }
-                ).onAppear {
+                ).onDisappear {
                     if viewStore.state.documentId.isEmpty {
-                        viewStore.send(CreateDairyAction.create)
+                        viewStore.send(.create)
                     }
                 }
             }.background(Color.listGray)
