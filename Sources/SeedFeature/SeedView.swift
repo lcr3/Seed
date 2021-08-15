@@ -54,7 +54,7 @@ public struct SeedView: View {
                             )
                         }
                         Section(header: HStack {
-                            Text("Diary")
+                            Image(systemName: "folder")
                             Spacer()
                             NavigationLink(
                                 destination: CreateDiaryView(
