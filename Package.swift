@@ -1,4 +1,4 @@
-// swift-tools-version:5.5.0
+// swift-tools-version:5.4.0
 import PackageDescription
 
 var package = Package(
@@ -6,7 +6,7 @@ var package = Package(
     defaultLocalization: "ja",
     platforms: [
         // .iOS(.v15)
-        .iOS("15.0"),
+        .iOS(.v14),
     ],
     products: [
         .library(
