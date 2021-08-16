@@ -101,21 +101,20 @@ public struct IconMenuView: View {
             Picker(selection: viewStore.binding(
                 get: \.selectedIconFlavor,
                 send: IconMenuAction.select
-            )) {
+            ), label: IconLabel(
+                text: viewStore.binding(
+                    get: \.selectedIconFlavor,
+                    send: IconMenuAction.select
+                )
+            ), content: {
                 ForEach(viewStore.state.icons, id: \.id) { icon in
                     VStack {
                         Text(icon.flavor.rawValue)
                         Image(uiImage: UIImage(named: icon.thumbnail)!)
                     }.tag(icon.flavor)
                 }
-            } label: {
-                IconLabel(
-                    text: viewStore.binding(
-                        get: \.selectedIconFlavor,
-                        send: IconMenuAction.select
-                    )
-                )
-            }.pickerStyle(MenuPickerStyle())
+            }
+            ).pickerStyle(MenuPickerStyle())
         }
     }
 }
