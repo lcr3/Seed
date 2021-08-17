@@ -14,7 +14,26 @@
 * `Debug.xcodeproj`, `Production.xcodeproj`環境を分けている
 * 各ページの機能をモジュール化して[Package.swift](./Package.swift)にて管理
 
-<img src='./Images/tree.png' width=200>
+```
+Seed
+├── Seed
+|   |   // Debug Configuration project
+│   ├── Debug.xcodeproj/
+|   |   // App Sources
+│   ├── iOS/
+│   ├── Package.swift
+|   |   // Production Configuration project
+│   └── Production.xcodeproj/
+├── Seed.xcworkspace
+├── Mintfile
+├── Package.swift
+├── README.md
+|   // Swift Pacakge Sources
+├── Sources
+|   // Swift Pacakge Tests
+└── Tests
+
+```
 
 ## 🥞DB
 
